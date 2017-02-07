@@ -1,0 +1,41 @@
+
+{
+	"buildFiles" : 
+	[
+		"/Users/like-a-rolling_stone/resource/VideoApplication/app/CMakeLists.txt"
+	],
+	"cleanCommands" : 
+	[
+		"/Users/like-a-rolling_stone/Library/Android/sdk/cmake/3.6.3155560/bin/cmake --build /Users/like-a-rolling_stone/resource/VideoApplication/app/.externalNativeBuild/cmake/release/armeabi-v7a --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"native-lib-Release-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "native-lib",
+			"buildCommand" : "/Users/like-a-rolling_stone/Library/Android/sdk/cmake/3.6.3155560/bin/cmake --build /Users/like-a-rolling_stone/resource/VideoApplication/app/.externalNativeBuild/cmake/release/armeabi-v7a --target native-lib",
+			"buildType" : "release",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=/Users/like-a-rolling_stone/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/like-a-rolling_stone/Library/Android/sdk/ndk-bundle/platforms/android-18/arch-arm  -Dnative_lib_EXPORTS -isystem /Users/like-a-rolling_stone/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/like-a-rolling_stone/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /Users/like-a-rolling_stone/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/Users/like-a-rolling_stone/resource/VideoApplication/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "/Users/like-a-rolling_stone/resource/VideoApplication/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				}
+			],
+			"output" : "/Users/like-a-rolling_stone/resource/VideoApplication/app/build/intermediates/cmake/release/obj/armeabi-v7a/libnative-lib.so",
+			"toolchain" : "5143547553630581282"
+		}
+	},
+	"toolchains" : 
+	{
+		"5143547553630581282" : 
+		{
+			"cCompilerExecutable" : "/Users/like-a-rolling_stone/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+			"cppCompilerExecutable" : "/Users/like-a-rolling_stone/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+		}
+	}
+}
