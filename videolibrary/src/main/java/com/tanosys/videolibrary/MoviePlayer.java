@@ -74,6 +74,8 @@ public class MoviePlayer {
 
     protected double mPlayRate = 1.0;
 
+    private double mRequestedPlayRate = 0;
+
     protected boolean mPlayWhenDoneSeek = false;
 
     protected float mProgress = 0;
@@ -181,6 +183,8 @@ public class MoviePlayer {
                     e.printStackTrace();
                 }
             } else if (mVideoDecoder.getState() == STATE_CHANGE_RATE && mAudioDecoder.getState() == STATE_CHANGE_RATE) {
+                mPlayRate = mRequestedPlayRate;
+                mRequestedPlayRate = 0;
                 mVideoDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
                 mAudioDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
                 try {
@@ -231,10 +235,12 @@ public class MoviePlayer {
 
     public void setRate(double rate) {
         synchronized (mSync) {
-            mPlayRate = rate;
             if (isPlaying()) {
+                mRequestedPlayRate = rate;
                 mVideoDecoder.changePlayRate();
                 mAudioDecoder.changePlayRate();
+            } else {
+                mPlayRate = rate;
             }
             mSync.notifyAll();
         }
