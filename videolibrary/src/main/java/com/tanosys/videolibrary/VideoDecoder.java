@@ -141,7 +141,7 @@ public class VideoDecoder extends MediaDecoder {
             Log.d(TAG, "seek diff:" + (presentationTime - mSeekTargetTime));
             mInputDone = mOutputDone = false;
             mSeekDirection = presentationTime >= mSeekTargetTime ? SEEK_DIRECTION_FORWARD : SEEK_DIRECTION_BACKWARD;
-            if (mSeekDirection == SEEK_DIRECTION_BACKWARD || presentationTime - mSeekTargetTime > 100000)
+            if (mSeekDirection == SEEK_DIRECTION_BACKWARD || presentationTime - mSeekTargetTime > 300000)
                 mExtractor.seekTo(mSeekTargetTime, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
             mSeekTargetTime = presentationTime;
             mDecoderSync.notifyAll();

@@ -72,7 +72,7 @@ public class VideoPlayActivity extends AppCompatActivity implements SurfaceHolde
         findViewById(R.id.rate_half_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                moviePlayer.setRate(0.6);
+                moviePlayer.setRate(0.5);
 
             }
         });
