@@ -170,9 +170,17 @@ public class MoviePlayer {
             mProgressHandler = null;
             Log.d(TAG, "on stopped");
             if (mVideoDecoder.getState() == STATE_STOPPED && mAudioDecoder.getState() == STATE_STOPPED) {
+                if (mRequestedPlayRate != 0) {
+                    mPlayRate = mRequestedPlayRate;
+                    mRequestedPlayRate = 0;
+                }
                 mVideoDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
                 mAudioDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
             } else if (mVideoDecoder.getState() == STATE_WAITING_FOR_LOOP && mAudioDecoder.getState() == STATE_WAITING_FOR_LOOP) {
+                if (mRequestedPlayRate != 0) {
+                    mPlayRate = mRequestedPlayRate;
+                    mRequestedPlayRate = 0;
+                }
                 Log.d(TAG, "looping");
                 try {
                     mVideoDecoder.startPlaying();
@@ -183,8 +191,10 @@ public class MoviePlayer {
                     e.printStackTrace();
                 }
             } else if (mVideoDecoder.getState() == STATE_CHANGE_RATE && mAudioDecoder.getState() == STATE_CHANGE_RATE) {
-                mPlayRate = mRequestedPlayRate;
-                mRequestedPlayRate = 0;
+                if (mRequestedPlayRate != 0) {
+                    mPlayRate = mRequestedPlayRate;
+                    mRequestedPlayRate = 0;
+                }
                 mVideoDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
                 mAudioDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
                 try {
@@ -202,6 +212,10 @@ public class MoviePlayer {
                     e.printStackTrace();
                 }
             } else if (mVideoDecoder.getState() == STATE_END_SEEK) {
+                if (mRequestedPlayRate != 0) {
+                    mPlayRate = mRequestedPlayRate;
+                    mRequestedPlayRate = 0;
+                }
                 mVideoDecoder.setState(STATE_STOPPED);
                 mAudioDecoder.setState(STATE_STOPPED);
                 mVideoDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
