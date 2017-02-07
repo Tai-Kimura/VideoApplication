@@ -25,13 +25,5 @@ proguard/
 
 # Log Files
 *.log
-
-gradle/
-
-crashlytics_core_2_3_15.xml
-fabric_1_3_15.xml
-build.gradle
-fabric.properties
-debug.keystore
-crashlytics-build.properties
-com_crashlytics_export_strings.xml
+*.keystore
+*.jks
