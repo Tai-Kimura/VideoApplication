@@ -207,7 +207,9 @@ public class VideoPlayActivity extends AppCompatActivity implements SurfaceHolde
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
+        if (moviePlayer != null) {
+            moviePlayer.release();
+        }
     }
 
     @Override
