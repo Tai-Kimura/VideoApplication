@@ -124,7 +124,7 @@ public class VideoPlayActivity extends AppCompatActivity implements SurfaceHolde
     protected void onPause() {
         super.onPause();
         if (moviePlayer != null)
-            moviePlayer.pause();
+            moviePlayer.stop();
     }
 
     @Override

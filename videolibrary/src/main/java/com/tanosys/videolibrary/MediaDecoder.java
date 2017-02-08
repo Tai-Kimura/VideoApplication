@@ -116,6 +116,12 @@ public abstract class MediaDecoder {
         return mExtractor.getSampleTime();
     }
 
+    public WeakReference<Thread> getDecodingThread() {
+        return mDecodingThread;
+    }
+
+    private WeakReference<Thread> mDecodingThread;
+
 
     public MediaDecoder(MoviePlayer moviePlayer, File sourceFile) throws IOException {
         if (moviePlayer == null) throw new NullPointerException("player is null");
@@ -155,7 +161,9 @@ public abstract class MediaDecoder {
             prepare();
             setState(STATE_PLAYING);
             mMediaCodec.start();
-            new Thread(mRunnable, getClass().getSimpleName()).start();
+            Thread thread = new Thread(mRunnable, getClass().getSimpleName());
+            mDecodingThread = new WeakReference<>(thread);
+            thread.start();
             if (DEBUG) Log.v(TAG, "startPlaying");
             mWeakPlayer.get().getSync().notify();
         }
@@ -183,17 +191,25 @@ public abstract class MediaDecoder {
 
     protected void stop() {
         synchronized (mWeakPlayer.get().getSync()) {
-            if (mMediaCodec != null) {
-                try {
-                    mState = STATE_INITIALIZED;
-                    mMediaCodec.stop();
-                    mMediaCodec.release();
-                    mMediaCodec = null;
-                } catch (Exception e) {
-                    Log.e(TAG, "failed releasing MediaCodec", e);
-                }
+            if (mDecodingThread != null && mDecodingThread.get() != null) {
+                mDecodingThread.get().interrupt();
             }
             mWeakPlayer.get().getSync().notify();
+        }
+    }
+
+    protected void releaseCodec() {
+        if (mMediaCodec != null) {
+            try {
+                mState = STATE_INITIALIZED;
+                if (mExtractor != null)
+                    mExtractor.seekTo(mExtractor.getSampleTime(), SEEK_TO_CLOSEST_SYNC);
+                mMediaCodec.stop();
+                mMediaCodec.release();
+                mMediaCodec = null;
+            } catch (Exception e) {
+                Log.e(TAG, "failed releasing MediaCodec", e);
+            }
         }
     }
 
@@ -220,26 +236,33 @@ public abstract class MediaDecoder {
         @Override
         public void run() {
             for (; mState == STATE_PLAYING && !mInputDone && !mOutputDone; ) {
+                if (Thread.currentThread().isInterrupted())
+                    break;
                 handleInput();
                 handleOutput();
             }
             Log.d(TAG, TRACK_TYPE + " done io");
             synchronized (mWeakPlayer.get().getSync()) {
-                mInputDone = mOutputDone = true;
-                Log.d(TAG, TRACK_TYPE + " state is " + mState);
-                if (mState == STATE_PLAYING) {
-                    setState(STATE_WAITING_FOR_LOOP);
-                    mExtractor.seekTo(0, SEEK_TO_CLOSEST_SYNC);
-                } else if (mState == STATE_REQUEST_CHANGE_RATE) {
-                    setState(STATE_CHANGE_RATE);
-                } else if (mState == STATE_REQUEST_STOP) {
-                    setState(STATE_STOPPED);
-                } else if (mState == STATE_REQUEST_SEEK) {
-                    setState(STATE_SEEKING);
-                    Log.d(TAG, TRACK_TYPE + "'s new state is " + mState);
+                if (Thread.currentThread().isInterrupted()) {
+                    Log.d(TAG, "thread interrupted");
+                    releaseCodec();
+                } else {
+                    mInputDone = mOutputDone = true;
+                    Log.d(TAG, TRACK_TYPE + " state is " + mState);
+                    if (mState == STATE_PLAYING) {
+                        setState(STATE_WAITING_FOR_LOOP);
+                        mExtractor.seekTo(0, SEEK_TO_CLOSEST_SYNC);
+                    } else if (mState == STATE_REQUEST_CHANGE_RATE) {
+                        setState(STATE_CHANGE_RATE);
+                    } else if (mState == STATE_REQUEST_STOP) {
+                        setState(STATE_STOPPED);
+                    } else if (mState == STATE_REQUEST_SEEK) {
+                        setState(STATE_SEEKING);
+                        Log.d(TAG, TRACK_TYPE + "'s new state is " + mState);
+                    }
+                    mMediaCodec.stop();
+                    mWeakPlayer.get().onStopped();
                 }
-                mMediaCodec.stop();
-                mWeakPlayer.get().onStopped();
                 mWeakPlayer.get().getSync().notify();
             }
         }
@@ -373,8 +396,11 @@ public abstract class MediaDecoder {
                     try {
                         mDecoderSync.wait(t / 1000, (int) ((t % 1000) * 1000));
                     } catch (final InterruptedException e) {
+                        Log.d(TAG, "wait interrupted");
+                        Thread.currentThread().interrupt();
+                        break;
                     }
-                    if ((mState == STATE_REQUEST_STOP) || (mState == STATE_SEEKING)|| (mState == STATE_CHANGE_RATE))
+                    if ((mState == STATE_REQUEST_STOP) || (mState == STATE_SEEKING) || (mState == STATE_CHANGE_RATE))
                         break;
                 }
             }
@@ -385,6 +411,6 @@ public abstract class MediaDecoder {
     }
 
     public void changePlayRate() {
-       mState = STATE_REQUEST_CHANGE_RATE;
+        mState = STATE_REQUEST_CHANGE_RATE;
     }
 }
