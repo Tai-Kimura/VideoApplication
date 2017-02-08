@@ -36,11 +36,16 @@ public class VideoDecoder extends MediaDecoder {
     protected static final int MSG_FRAME_AVAILABLE = 1;
     protected static final int SEEK_DIRECTION_FORWARD = 1;
     protected static final int SEEK_DIRECTION_BACKWARD = 2;
+    protected static final long CLOSE_ENOUGH_TIME = 100000;
     private static final String TAG = "VideoDecoder";
     private int mVideoWidth;
     private int mVideoHeight;
     private long mSeekTargetTime = -1;
     private int mSeekDirection = 0;
+    private long mLastSyncFrameTime = -1;
+    private long mMaximumDifference = 0;
+    private boolean mIsSeeking = false;
+    private boolean mShouldRetreatToIFrame = false;
 
     public int getVideoWidth() {
         return mVideoWidth;
@@ -83,6 +88,11 @@ public class VideoDecoder extends MediaDecoder {
                     throw new RuntimeException("No video track found in " + mTrackIndex);
                 }
                 mExtractor.selectTrack(mTrackIndex);
+                long now = mExtractor.getSampleTime();
+                mExtractor.seekTo(now + 1, MediaExtractor.SEEK_TO_NEXT_SYNC);
+                mMaximumDifference = mExtractor.getSampleTime() - now;
+                mExtractor.seekTo(0, MediaExtractor.SEEK_TO_CLOSEST_SYNC);
+                Log.d(TAG, "iframe interval is: " + mMaximumDifference);
             }
             mState = STATE_INITIALIZED;
             MediaFormat format = mExtractor.getTrackFormat(mTrackIndex);
@@ -92,6 +102,7 @@ public class VideoDecoder extends MediaDecoder {
             mVideoWidth = format.getInteger(MediaFormat.KEY_WIDTH);
             mVideoHeight = format.getInteger(MediaFormat.KEY_HEIGHT);
             mMediaCodec.configure(format, mOutputSurface.get(), null, 0);
+
         }
         super.prepare();
     }
@@ -107,8 +118,25 @@ public class VideoDecoder extends MediaDecoder {
             mMediaCodec.releaseOutputBuffer(outputBufIndex, true);
         } else {
             boolean isSyncFrame = (bufferInfo.flags & MediaCodec.BUFFER_FLAG_KEY_FRAME) != 0;
-            if (isSyncFrame || mSeekDirection == SEEK_DIRECTION_FORWARD || (mSeekDirection == SEEK_DIRECTION_BACKWARD && (Math.abs(mSeekTargetTime - mExtractor.getSampleTime()) < 10000))) {
+            boolean isCloseEnoughToTargetTime = (Math.abs(mSeekTargetTime - mExtractor.getSampleTime()) < CLOSE_ENOUGH_TIME);
+            if (mSeekDirection == SEEK_DIRECTION_FORWARD || (mSeekDirection == SEEK_DIRECTION_BACKWARD && (isCloseEnoughToTargetTime || mShouldRetreatToIFrame))) {
                 mMediaCodec.releaseOutputBuffer(outputBufIndex, true);
+                if (isSyncFrame || isCloseEnoughToTargetTime || mShouldRetreatToIFrame) {
+                    synchronized (mDecoderSync) {
+                        if (mShouldRetreatToIFrame) {
+                            mShouldRetreatToIFrame = false;
+                            mExtractor.seekTo(mSeekTargetTime, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
+                        }
+                        if (isSyncFrame) {
+                            mLastSyncFrameTime = bufferInfo.presentationTimeUs;
+                        }
+                        if (isCloseEnoughToTargetTime) {
+                            Log.d(TAG, "close enough to direction " + mSeekDirection);
+                            mIsSeeking = false;
+                        }
+                        mDecoderSync.notify();
+                    }
+                }
             } else {
                 mMediaCodec.releaseOutputBuffer(outputBufIndex, false);
             }
@@ -132,6 +160,7 @@ public class VideoDecoder extends MediaDecoder {
         mMediaCodec.start();
         mSeekTargetTime = mExtractor.getSampleTime();
         mExtractor.seekTo(mSeekTargetTime, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
+        mIsSeeking = true;
         new Thread(mSeekRunnable, getClass().getSimpleName()).start();
     }
 
@@ -141,9 +170,15 @@ public class VideoDecoder extends MediaDecoder {
             Log.d(TAG, "seek diff:" + (presentationTime - mSeekTargetTime));
             mInputDone = mOutputDone = false;
             mSeekDirection = presentationTime >= mSeekTargetTime ? SEEK_DIRECTION_FORWARD : SEEK_DIRECTION_BACKWARD;
-            if (mSeekDirection == SEEK_DIRECTION_BACKWARD || presentationTime - mExtractor.getSampleTime() > 300000)
+            if ((mSeekDirection == SEEK_DIRECTION_BACKWARD && !mIsSeeking) || mSeekDirection == SEEK_DIRECTION_FORWARD && Math.abs(presentationTime - mLastSyncFrameTime) > mMaximumDifference) {
                 mExtractor.seekTo(presentationTime, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
+                mLastSyncFrameTime = mExtractor.getSampleTime();
+            } else if (mIsSeeking && mSeekDirection == SEEK_DIRECTION_BACKWARD && presentationTime - mLastSyncFrameTime < 0) {
+                mExtractor.seekTo(mLastSyncFrameTime + 1, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
+                mShouldRetreatToIFrame = true;
+            }
             mSeekTargetTime = presentationTime;
+            mIsSeeking = true;
             mDecoderSync.notifyAll();
         }
     }
@@ -159,8 +194,13 @@ public class VideoDecoder extends MediaDecoder {
         public void run() {
             Log.d(TAG, "seeking start");
             while (mState == STATE_SEEKING) {
-                if (mExtractor.getSampleTime() >= mSeekTargetTime)
+                if (mExtractor.getSampleTime() - mSeekTargetTime >= CLOSE_ENOUGH_TIME && !mShouldRetreatToIFrame) {
+                    synchronized (mDecoderSync) {
+                        mIsSeeking = false;
+                        mDecoderSync.notify();
+                    }
                     continue;
+                }
                 handleInput();
                 handleOutput();
             }
