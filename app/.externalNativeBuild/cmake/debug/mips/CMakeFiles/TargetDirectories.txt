@@ -1,3 +1,0 @@
-/Users/like-a-rolling_stone/resource/VideoApplication/app/.externalNativeBuild/cmake/debug/mips/CMakeFiles/edit_cache.dir
-/Users/like-a-rolling_stone/resource/VideoApplication/app/.externalNativeBuild/cmake/debug/mips/CMakeFiles/rebuild_cache.dir
-/Users/like-a-rolling_stone/resource/VideoApplication/app/.externalNativeBuild/cmake/debug/mips/CMakeFiles/native-lib.dir
