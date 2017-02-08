@@ -118,9 +118,11 @@ public class VideoDecoder extends MediaDecoder {
             mMediaCodec.releaseOutputBuffer(outputBufIndex, true);
         } else {
             boolean isSyncFrame = (bufferInfo.flags & MediaCodec.BUFFER_FLAG_KEY_FRAME) != 0;
-            boolean isCloseEnoughToTargetTime = (Math.abs(mSeekTargetTime - mExtractor.getSampleTime()) < CLOSE_ENOUGH_TIME);
-            if (mSeekDirection == SEEK_DIRECTION_FORWARD || (mSeekDirection == SEEK_DIRECTION_BACKWARD && (isCloseEnoughToTargetTime || mShouldRetreatToIFrame))) {
+            long presentationTimeDiff = mSeekTargetTime - bufferInfo.presentationTimeUs;
+            boolean isCloseEnoughToTargetTime = (Math.abs(presentationTimeDiff) < CLOSE_ENOUGH_TIME);
+            if (mSeekDirection == SEEK_DIRECTION_FORWARD || (mSeekDirection == SEEK_DIRECTION_BACKWARD && ((isCloseEnoughToTargetTime && presentationTimeDiff > 0) || mShouldRetreatToIFrame))) {
                 mMediaCodec.releaseOutputBuffer(outputBufIndex, true);
+                if (mSeekDirection == SEEK_DIRECTION_BACKWARD ) Log.d(TAG, "backward render at: " + bufferInfo.presentationTimeUs + " target at: " + mSeekTargetTime);
                 if (isSyncFrame || isCloseEnoughToTargetTime || mShouldRetreatToIFrame) {
                     synchronized (mDecoderSync) {
                         if (mShouldRetreatToIFrame) {
@@ -194,7 +196,7 @@ public class VideoDecoder extends MediaDecoder {
         public void run() {
             Log.d(TAG, "seeking start");
             while (mState == STATE_SEEKING) {
-                if (mExtractor.getSampleTime() - mSeekTargetTime >= CLOSE_ENOUGH_TIME && !mShouldRetreatToIFrame) {
+                if (Math.abs(mExtractor.getSampleTime() - mSeekTargetTime) <= CLOSE_ENOUGH_TIME && !mShouldRetreatToIFrame) {
                     synchronized (mDecoderSync) {
                         mIsSeeking = false;
                         mDecoderSync.notify();
