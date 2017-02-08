@@ -60,14 +60,15 @@ public class AudioDecoder extends MediaDecoder {
                 mExtractor.selectTrack(mTrackIndex);
                 format = mExtractor.getTrackFormat(mTrackIndex);
                 mSampleRate = format.getInteger(MediaFormat.KEY_SAMPLE_RATE);
+                int audioChannels = format.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
                 mAudioTrack = new AudioTrack(
                         AudioManager.STREAM_MUSIC,
                         mSampleRate,
-                        AudioFormat.CHANNEL_OUT_STEREO,
+                        (audioChannels == 1 ? AudioFormat.CHANNEL_OUT_MONO : AudioFormat.CHANNEL_OUT_STEREO),
                         AudioFormat.ENCODING_PCM_16BIT,
                         AudioTrack.getMinBufferSize(
                                 mSampleRate,
-                                AudioFormat.CHANNEL_OUT_STEREO,
+                                (audioChannels == 1 ? AudioFormat.CHANNEL_OUT_MONO : AudioFormat.CHANNEL_OUT_STEREO),
                                 AudioFormat.ENCODING_PCM_16BIT
                         ),
                         AudioTrack.MODE_STREAM
