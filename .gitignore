@@ -28,3 +28,4 @@ proguard/
 *.keystore
 *.jks
 .externalNativeBuild/
+fabric.properties
