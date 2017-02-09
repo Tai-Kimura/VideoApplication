@@ -33,6 +33,7 @@ import static android.media.MediaExtractor.SEEK_TO_CLOSEST_SYNC;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_CHANGE_RATE;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_END_SEEK;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_PLAYING;
+import static com.tanosys.videolibrary.MediaDecoder.STATE_PREPARED;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_SEEKING;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_STOPPED;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_WAITING_FOR_LOOP;
@@ -98,17 +99,8 @@ public class MoviePlayer {
             mVideoDecoder = new VideoDecoder(this, sourceFile);
             mVideoDecoder.setOutputSurface(outputSurface);
             mAudioDecoder = new AudioDecoder(this, sourceFile);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        mVideoDecoder.prepare();
-                        mAudioDecoder.prepare();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
+            mVideoDecoder.prepare();
+            mAudioDecoder.prepare();
         } catch (Exception ex) {
             release();
             throw new IOException(ex.getMessage());
@@ -122,8 +114,10 @@ public class MoviePlayer {
      */
     public void pause() {
         synchronized (mSync) {
-            mVideoDecoder.requestStop();
-            mAudioDecoder.requestStop();
+            if (isPlaying()) {
+                mVideoDecoder.requestStop();
+                mAudioDecoder.requestStop();
+            }
             mSync.notifyAll();
         }
     }
@@ -140,11 +134,21 @@ public class MoviePlayer {
     }
 
     public boolean isPlaying() {
-        return mVideoDecoder.getState() == STATE_PLAYING || mAudioDecoder.getState() == STATE_PLAYING;
+        return mVideoDecoder.getState() == STATE_PLAYING && mAudioDecoder.getState() == STATE_PLAYING;
+    }
+
+    public boolean isPaused() {
+        return (mVideoDecoder.getState() <= STATE_PREPARED
+        ) && (mAudioDecoder.getState() <= STATE_PREPARED
+        );
     }
 
     public boolean isSeeking() {
         return mVideoDecoder.getState() == STATE_SEEKING && mAudioDecoder.getState() == STATE_SEEKING;
+    }
+
+    public boolean isRequestingStateChange() {
+        return mVideoDecoder.isRequestingStateChange() || mAudioDecoder.isRequestingStateChange();
     }
 
     /**
@@ -153,12 +157,20 @@ public class MoviePlayer {
      * Does not return until video playback is complete, or we get a "stop" signal from
      * frameCallback.
      */
-    public void play() throws IOException {
+    public void play() {
         synchronized (mSync) {
-            mVideoDecoder.startPlaying();
-            mAudioDecoder.startPlaying();
-            mProgressHandler = new Handler(Looper.getMainLooper());
-            mProgressHandler.post(mProgressRunnable);
+            if (isPaused()) {
+                try {
+                    mVideoDecoder.startPlaying();
+                    mAudioDecoder.startPlaying();
+                    mProgressHandler = new Handler(Looper.getMainLooper());
+                    mProgressHandler.post(mProgressRunnable);
+                } catch (Exception e) {
+                    Log.e(TAG, "failed to play: " + e.getMessage());
+                    mVideoDecoder.stop();
+                    mAudioDecoder.stop();
+                }
+            }
             mSync.notifyAll();
         }
     }
@@ -315,9 +327,9 @@ public class MoviePlayer {
         public void run() {
             if (isPlaying()) {
                 long time;
-                long videoPresentTime = mVideoDecoder.getExtractor().getSampleTime()/1000;
-                long audioPresentTime = mAudioDecoder.getExtractor().getSampleTime()/1000;
-                if (Math.abs(videoPresentTime - audioPresentTime) > mVideoDuration/2) {
+                long videoPresentTime = mVideoDecoder.getExtractor().getSampleTime() / 1000;
+                long audioPresentTime = mAudioDecoder.getExtractor().getSampleTime() / 1000;
+                if (Math.abs(videoPresentTime - audioPresentTime) > mVideoDuration / 2) {
                     time = Math.max(videoPresentTime, audioPresentTime);
                 } else {
                     time = Math.min(videoPresentTime, audioPresentTime);

@@ -50,7 +50,7 @@ public class AudioDecoder extends MediaDecoder {
 
     @Override
     protected void prepare() throws IOException {
-        if (mState < STATE_PREPARED) {
+        if (mState < STATE_PREPARED && mState != STATE_STOPPED) {
             MediaFormat format;
             if (mState == STATE_UNINITIALIZED) {
                 mTrackIndex = selectTrack();
@@ -111,7 +111,7 @@ public class AudioDecoder extends MediaDecoder {
     }
 
     @Override
-    protected void startPlaying() throws IOException {
+    protected void startPlaying() throws IOException, IllegalStateException {
         setPlayRate(mWeakPlayer.get().getPlayRate());
         mAudioTrack.play();
         super.startPlaying();

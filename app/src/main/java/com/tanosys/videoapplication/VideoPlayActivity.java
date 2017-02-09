@@ -52,11 +52,7 @@ public class VideoPlayActivity extends AppCompatActivity implements SurfaceHolde
                 if (moviePlayer.isPlaying()) {
                     moviePlayer.pause();
                 } else {
-                    try {
-                        moviePlayer.play();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    moviePlayer.play();
                 }
             }
         });
