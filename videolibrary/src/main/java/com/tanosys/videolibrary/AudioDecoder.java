@@ -50,7 +50,7 @@ public class AudioDecoder extends MediaDecoder {
 
     @Override
     protected void prepare() throws IOException {
-        if (mState < STATE_PREPARED && mState != STATE_STOPPED) {
+        if (mState < STATE_PREPARED) {
             MediaFormat format;
             if (mState == STATE_UNINITIALIZED) {
                 mTrackIndex = selectTrack();

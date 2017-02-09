@@ -33,7 +33,6 @@ import static android.media.MediaExtractor.SEEK_TO_CLOSEST_SYNC;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_CHANGE_RATE;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_END_SEEK;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_PLAYING;
-import static com.tanosys.videolibrary.MediaDecoder.STATE_PREPARED;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_SEEKING;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_STOPPED;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_WAITING_FOR_LOOP;
@@ -138,8 +137,8 @@ public class MoviePlayer {
     }
 
     public boolean isPaused() {
-        return (mVideoDecoder.getState() <= STATE_PREPARED
-        ) && (mAudioDecoder.getState() <= STATE_PREPARED
+        return (mVideoDecoder.getState() <= STATE_STOPPED
+        ) && (mAudioDecoder.getState() <= STATE_STOPPED
         );
     }
 

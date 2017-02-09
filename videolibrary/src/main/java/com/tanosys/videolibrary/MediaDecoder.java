@@ -38,9 +38,9 @@ import static android.media.MediaExtractor.SEEK_TO_CLOSEST_SYNC;
 public abstract class MediaDecoder {
     private static final int TIMEOUT_USEC = 10000;
     public static final int STATE_UNINITIALIZED = -1;
-    public static final int STATE_STOPPED = 0;
-    public static final int STATE_INITIALIZED = 1;
-    public static final int STATE_PREPARED = 2;
+    public static final int STATE_INITIALIZED = 0;
+    public static final int STATE_PREPARED = 1;
+    public static final int STATE_STOPPED = 2;
     public static final int STATE_PLAYING = 3;
     public static final int STATE_REQUEST_STOP = 4;
     public static final int STATE_REQUEST_SEEK = 5;
@@ -151,7 +151,7 @@ public abstract class MediaDecoder {
     protected void prepare() throws IOException {
         if (mState < STATE_PREPARED) {
             mState = STATE_PREPARED;
-        } else if (mState > STATE_REQUEST_STOP) {
+        } else {
             configure();
         }
     }
