@@ -37,6 +37,7 @@ import static android.media.MediaExtractor.SEEK_TO_CLOSEST_SYNC;
 
 public abstract class MediaDecoder {
     private static final int TIMEOUT_USEC = 10000;
+    public static final int STATE_NO_TRACK_FOUND = -2;
     public static final int STATE_UNINITIALIZED = -1;
     public static final int STATE_INITIALIZED = 0;
     public static final int STATE_PREPARED = 1;
@@ -63,6 +64,8 @@ public abstract class MediaDecoder {
     }
 
     public void setState(int state) {
+        if (this.mState == STATE_NO_TRACK_FOUND)
+            return;
         this.mState = state;
         if (state == STATE_PLAYING) {
             mLastPresentationTime = mExtractor.getSampleTime();
@@ -149,6 +152,8 @@ public abstract class MediaDecoder {
     }
 
     protected void prepare() throws IOException {
+        if (mState == STATE_NO_TRACK_FOUND)
+            return;
         Log.d(TAG, TRACK_TYPE + "'s state is " + mState);
         if (mState > STATE_PREPARED) {
             configure();
@@ -156,6 +161,8 @@ public abstract class MediaDecoder {
     }
 
     void startPlaying() throws IOException, IllegalStateException {
+        if (mState == STATE_NO_TRACK_FOUND)
+            return;
         synchronized (mWeakPlayer.get().getSync()) {
             mInputDone = mOutputDone = false;
             prepare();
@@ -174,6 +181,8 @@ public abstract class MediaDecoder {
      * Release all releated objects
      */
     protected void requestStop() {
+        if (mState == STATE_NO_TRACK_FOUND)
+            return;
         synchronized (mWeakPlayer.get().getSync()) {
             setState(STATE_REQUEST_STOP);
             if (DEBUG) Log.v(TAG, "request stop");
@@ -182,6 +191,8 @@ public abstract class MediaDecoder {
     }
 
     protected void requestSeek() {
+        if (mState == STATE_NO_TRACK_FOUND)
+            return;
         synchronized (mWeakPlayer.get().getSync()) {
             if (mState == STATE_SEEKING)
                 return;
@@ -204,6 +215,8 @@ public abstract class MediaDecoder {
     }
 
     protected void stop() {
+        if (mState == STATE_NO_TRACK_FOUND)
+            return;
         synchronized (mWeakPlayer.get().getSync()) {
             Log.d(TAG, TRACK_TYPE + " is requested to stop");
             if (mDecodingThread != null && mDecodingThread.get() != null && mDecodingThread.get().isAlive()) {
@@ -217,6 +230,8 @@ public abstract class MediaDecoder {
     }
 
     protected void releaseCodec() {
+        if (mState == STATE_NO_TRACK_FOUND)
+            return;
         if (mMediaCodec != null) {
             try {
                 mState = STATE_INITIALIZED;
@@ -239,6 +254,8 @@ public abstract class MediaDecoder {
     }
 
     protected void release() {
+        if (mState == STATE_NO_TRACK_FOUND)
+            return;
         stop();
         synchronized (mWeakPlayer.get().getSync()) {
             if (mExtractor != null) {
@@ -446,10 +463,40 @@ public abstract class MediaDecoder {
     }
 
     public void changePlayRate() {
+        if (mState == STATE_NO_TRACK_FOUND)
+            return;
         mState = STATE_REQUEST_CHANGE_RATE;
     }
 
     public boolean isRequestingStateChange() {
         return mState == STATE_REQUEST_STOP || mState == STATE_REQUEST_SEEK || mState == STATE_REQUEST_CHANGE_RATE || mState == STATE_WAITING_FOR_LOOP;
+    }
+
+    public boolean isPlaying() {
+        return mState == STATE_PLAYING || mState == STATE_NO_TRACK_FOUND;
+    }
+
+    public boolean isStopped() {
+        return mState == STATE_STOPPED || mState == STATE_NO_TRACK_FOUND;
+    }
+
+    public boolean isWaitingForLoop() {
+        return mState == STATE_WAITING_FOR_LOOP || mState == STATE_NO_TRACK_FOUND;
+    }
+
+    public boolean isChangeRate() {
+        return mState == STATE_CHANGE_RATE|| mState == STATE_NO_TRACK_FOUND;
+    }
+
+    public boolean isRequestSeek() {
+        return mState == STATE_REQUEST_SEEK || mState == STATE_NO_TRACK_FOUND;
+    }
+
+    public boolean isSeeking() {
+        return mState == STATE_SEEKING || mState == STATE_NO_TRACK_FOUND;
+    }
+
+    public boolean isEndSeek() {
+        return mState == STATE_END_SEEK || mState == STATE_NO_TRACK_FOUND;
     }
 }

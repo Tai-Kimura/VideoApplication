@@ -30,13 +30,9 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 import static android.media.MediaExtractor.SEEK_TO_CLOSEST_SYNC;
-import static com.tanosys.videolibrary.MediaDecoder.STATE_CHANGE_RATE;
-import static com.tanosys.videolibrary.MediaDecoder.STATE_END_SEEK;
-import static com.tanosys.videolibrary.MediaDecoder.STATE_PLAYING;
-import static com.tanosys.videolibrary.MediaDecoder.STATE_REQUEST_SEEK;
+import static com.tanosys.videolibrary.MediaDecoder.STATE_NO_TRACK_FOUND;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_SEEKING;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_STOPPED;
-import static com.tanosys.videolibrary.MediaDecoder.STATE_WAITING_FOR_LOOP;
 
 /**
  * Created by like-a-rolling_stone on 2017/01/26.
@@ -134,17 +130,17 @@ public class MoviePlayer {
     }
 
     public boolean isPlaying() {
-        return mVideoDecoder.getState() == STATE_PLAYING && mAudioDecoder.getState() == STATE_PLAYING;
+        return mVideoDecoder.isPlaying() && mAudioDecoder.isPlaying();
     }
 
     public boolean isPaused() {
         return (mVideoDecoder.getState() <= STATE_STOPPED
         ) && (mAudioDecoder.getState() <= STATE_STOPPED
-        );
+         );
     }
 
     public boolean isSeeking() {
-        return mVideoDecoder.getState() == STATE_SEEKING && mAudioDecoder.getState() == STATE_SEEKING;
+        return mVideoDecoder.isSeeking() && mAudioDecoder.isSeeking();
     }
 
     public boolean isRequestingStateChange() {
@@ -188,14 +184,14 @@ public class MoviePlayer {
                 mProgressHandler.removeCallbacks(mProgressRunnable);
             mProgressHandler = null;
             Log.d(TAG, "on stopped");
-            if (mVideoDecoder.getState() == STATE_STOPPED && mAudioDecoder.getState() == STATE_STOPPED) {
+            if (mVideoDecoder.isStopped() && mAudioDecoder.isStopped()) {
                 if (mRequestedPlayRate != 0) {
                     mPlayRate = mRequestedPlayRate;
                     mRequestedPlayRate = 0;
                 }
                 mVideoDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
                 mAudioDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
-            } else if (mVideoDecoder.getState() == STATE_WAITING_FOR_LOOP && mAudioDecoder.getState() == STATE_WAITING_FOR_LOOP) {
+            } else if (mVideoDecoder.isWaitingForLoop() && mAudioDecoder.isWaitingForLoop()) {
                 if (mRequestedPlayRate != 0) {
                     mPlayRate = mRequestedPlayRate;
                     mRequestedPlayRate = 0;
@@ -209,7 +205,7 @@ public class MoviePlayer {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else if (mVideoDecoder.getState() == STATE_CHANGE_RATE && mAudioDecoder.getState() == STATE_CHANGE_RATE) {
+            } else if (mVideoDecoder.isChangeRate() && mAudioDecoder.isChangeRate()) {
                 if (mRequestedPlayRate != 0) {
                     mPlayRate = mRequestedPlayRate;
                     mRequestedPlayRate = 0;
@@ -224,14 +220,14 @@ public class MoviePlayer {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else if (mVideoDecoder.getState() == STATE_REQUEST_SEEK && mAudioDecoder.getState() == STATE_REQUEST_SEEK) {
+            } else if (mVideoDecoder.isRequestSeek() && mAudioDecoder.isRequestSeek()) {
                 try {
                     mVideoDecoder.startSeeking();
                     mAudioDecoder.startSeeking();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else if (mVideoDecoder.getState() == STATE_END_SEEK) {
+            } else if (mVideoDecoder.isEndSeek()) {
                 if (mRequestedPlayRate != 0) {
                     mPlayRate = mRequestedPlayRate;
                     mRequestedPlayRate = 0;
@@ -340,10 +336,14 @@ public class MoviePlayer {
                 long time;
                 long videoPresentTime = mVideoDecoder.getExtractor().getSampleTime() / 1000;
                 long audioPresentTime = mAudioDecoder.getExtractor().getSampleTime() / 1000;
-                if (Math.abs(videoPresentTime - audioPresentTime) > mVideoDuration / 2) {
-                    time = Math.max(videoPresentTime, audioPresentTime);
+                if (mAudioDecoder.getState() == STATE_NO_TRACK_FOUND) {
+                    time = videoPresentTime;
                 } else {
-                    time = Math.min(videoPresentTime, audioPresentTime);
+                    if (Math.abs(videoPresentTime - audioPresentTime) > mVideoDuration / 2) {
+                        time = Math.max(videoPresentTime, audioPresentTime);
+                    } else {
+                        time = Math.min(videoPresentTime, audioPresentTime);
+                    }
                 }
                 mProgress = (float) ((double) (time) / (double) (mVideoDuration));
                 if (mProgress < 0)

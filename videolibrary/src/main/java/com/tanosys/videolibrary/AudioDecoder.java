@@ -40,6 +40,8 @@ public class AudioDecoder extends MediaDecoder {
     private AudioTrack mAudioTrack;
 
     public void setPlayRate(double playRate) {
+        if (mState == STATE_NO_TRACK_FOUND)
+            return;
         mAudioTrack.setPlaybackRate((int) ((double)mSampleRate * playRate));
     }
 
@@ -55,7 +57,8 @@ public class AudioDecoder extends MediaDecoder {
             if (mState == STATE_UNINITIALIZED) {
                 mTrackIndex = selectTrack();
                 if (mTrackIndex < 0) {
-                    throw new RuntimeException("No audio track found in " + mTrackIndex);
+                    setState(STATE_NO_TRACK_FOUND);
+                    return;
                 }
                 mExtractor.selectTrack(mTrackIndex);
                 format = mExtractor.getTrackFormat(mTrackIndex);
@@ -113,6 +116,8 @@ public class AudioDecoder extends MediaDecoder {
 
     @Override
     protected void startPlaying() throws IOException, IllegalStateException {
+        if (mState == STATE_NO_TRACK_FOUND)
+            return;
         setPlayRate(mWeakPlayer.get().getPlayRate());
         mAudioTrack.play();
         super.startPlaying();
