@@ -6,16 +6,13 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="ifr" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb0af9ce-362c-4b54-84f3-5de565297ea3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/build.gradle" afterPath="$PROJECT_DIR$/videolibrary/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/AudioDecoder.java" afterPath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/AudioDecoder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java" afterPath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java" afterPath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java" afterPath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/videolibrary.iml" afterPath="$PROJECT_DIR$/videolibrary/videolibrary.iml" />
     </list>
@@ -109,7 +106,7 @@
       <file leaf-file-name="MediaDecoder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1848">
+            <state relative-caret-position="-240">
               <caret line="288" column="0" selection-start-line="288" selection-start-column="0" selection-end-line="288" selection-end-column="0" />
               <folding>
                 <element signature="e#0#16792#0" expanded="true" />
@@ -159,7 +156,7 @@
       <file leaf-file-name="MoviePlayer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="2205">
               <caret line="226" column="119" selection-start-line="226" selection-start-column="119" selection-end-line="226" selection-end-column="119" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -183,14 +180,14 @@
       <file leaf-file-name="VideoDecoder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="164" column="4" selection-start-line="164" selection-start-column="4" selection-end-line="179" selection-end-column="5" />
+            <state relative-caret-position="315">
+              <caret line="103" column="29" selection-start-line="103" selection-start-column="29" selection-end-line="103" selection-end-column="29" />
               <folding>
-                <element signature="e#0#8526#0" expanded="true" />
+                <element signature="e#0#8894#0" expanded="true" />
                 <element signature="e#1456#1457#0" expanded="true" />
                 <element signature="e#1494#1495#0" expanded="true" />
-                <element signature="e#7877#8522#0" expanded="true" />
-                <element signature="e#8521#8522#0" expanded="true" />
+                <element signature="e#8245#8890#0" expanded="true" />
+                <element signature="e#8889#8890#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2589,7 +2586,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5946031507000" />
+        <entry key="$PROJECT_DIR$" value="5946033129000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2975,9 +2972,9 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/tanosys/videoapplication/VideoPlayActivity.java" />
         <option value="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java" />
-        <option value="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java" />
         <option value="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/AudioDecoder.java" />
         <option value="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java" />
+        <option value="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java" />
         <option value="$PROJECT_DIR$/videolibrary/build.gradle" />
       </list>
     </option>
@@ -3103,7 +3100,7 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="settings.editor.selected.configurable" value="copyright" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="device.picker.selection" value="BH901FM823" />
+    <property name="device.picker.selection" value="Nexus_5X_API_25" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
     <property name="ExportApk.Flavors" value="" />
@@ -3748,9 +3745,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/AudioDecoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1848">
+        <state relative-caret-position="-240">
           <caret line="288" column="0" selection-start-line="288" selection-start-column="0" selection-end-line="288" selection-end-column="0" />
           <folding>
             <element signature="e#0#16792#0" expanded="true" />
@@ -3773,33 +3788,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="164" column="4" selection-start-line="164" selection-start-column="4" selection-end-line="179" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#8526#0" expanded="true" />
-            <element signature="e#1456#1457#0" expanded="true" />
-            <element signature="e#1494#1495#0" expanded="true" />
-            <element signature="e#7877#8522#0" expanded="true" />
-            <element signature="e#8521#8522#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/AudioDecoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
+        <state relative-caret-position="2205">
           <caret line="226" column="119" selection-start-line="226" selection-start-column="119" selection-end-line="226" selection-end-column="119" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -3819,11 +3810,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+    <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="315">
+          <caret line="103" column="29" selection-start-line="103" selection-start-column="29" selection-end-line="103" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#8894#0" expanded="true" />
+            <element signature="e#1456#1457#0" expanded="true" />
+            <element signature="e#1494#1495#0" expanded="true" />
+            <element signature="e#8245#8890#0" expanded="true" />
+            <element signature="e#8889#8890#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

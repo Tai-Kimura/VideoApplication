@@ -93,11 +93,21 @@ public class VideoDecoder extends MediaDecoder {
                     throw new RuntimeException("No video track found in " + mTrackIndex);
                 }
                 mExtractor.selectTrack(mTrackIndex);
-                long now = mExtractor.getSampleTime();
-                mExtractor.seekTo(now + 1, MediaExtractor.SEEK_TO_NEXT_SYNC);
-                mMaximumDifference = mExtractor.getSampleTime() - now;
+
                 mExtractor.seekTo(0, MediaExtractor.SEEK_TO_CLOSEST_SYNC);
-                Log.d(TAG, "iframe interval is: " + mMaximumDifference);
+                long now = mExtractor.getSampleTime();
+                long next = now + 1;
+                while (mMaximumDifference == 0) {
+                    mExtractor.seekTo(next, MediaExtractor.SEEK_TO_NEXT_SYNC);
+                    mMaximumDifference = mExtractor.getSampleTime() - now;
+                    Log.d(TAG, "iframe interval is: " + mMaximumDifference);
+                    next+=100;
+                    if (next > 10000) {
+                        mMaximumDifference = 1000000;
+                        break;
+                    }
+                }
+                mExtractor.seekTo(0, MediaExtractor.SEEK_TO_CLOSEST_SYNC);
             }
             mState = STATE_INITIALIZED;
             MediaFormat format = mExtractor.getTrackFormat(mTrackIndex);
