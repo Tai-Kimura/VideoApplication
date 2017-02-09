@@ -33,6 +33,7 @@ import static android.media.MediaExtractor.SEEK_TO_CLOSEST_SYNC;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_CHANGE_RATE;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_END_SEEK;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_PLAYING;
+import static com.tanosys.videolibrary.MediaDecoder.STATE_REQUEST_SEEK;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_SEEKING;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_STOPPED;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_WAITING_FOR_LOOP;
@@ -223,9 +224,10 @@ public class MoviePlayer {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else if (mVideoDecoder.getState() == STATE_SEEKING) {
+            } else if (mVideoDecoder.getState() == STATE_REQUEST_SEEK && mAudioDecoder.getState() == STATE_REQUEST_SEEK) {
                 try {
                     mVideoDecoder.startSeeking();
+                    mAudioDecoder.startSeeking();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -316,7 +318,8 @@ public class MoviePlayer {
 
     public void endSeek() {
         synchronized (mSync) {
-            mVideoDecoder.endSeeking();
+            if (isSeeking())
+                mVideoDecoder.endSeeking();
         }
     }
 

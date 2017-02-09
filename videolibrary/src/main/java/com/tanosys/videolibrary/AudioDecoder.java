@@ -133,4 +133,11 @@ public class AudioDecoder extends MediaDecoder {
         super.changePlayRate();
     }
 
+    @Override
+    public void startSeeking() throws IOException {
+        super.startSeeking();
+        if (mState == STATE_SEEKING)
+            return;
+        setState(STATE_SEEKING);
+    }
 }

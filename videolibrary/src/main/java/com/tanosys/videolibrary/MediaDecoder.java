@@ -187,7 +187,7 @@ public abstract class MediaDecoder {
                 return;
             if (mDecodingThread != null && mDecodingThread.get() != null && mDecodingThread.get().isAlive()) {
                 setState(STATE_REQUEST_SEEK);
-                if (DEBUG) Log.v(TAG, "request seek");
+                Log.v(TAG, "request seek");
             } else {
                 try {
                     startSeeking();
@@ -286,7 +286,6 @@ public abstract class MediaDecoder {
                         } else if (mState == STATE_REQUEST_STOP) {
                             setState(STATE_STOPPED);
                         } else if (mState == STATE_REQUEST_SEEK) {
-                            setState(STATE_SEEKING);
                             Log.d(TAG, TRACK_TYPE + "'s new state is " + mState);
                         }
                         mMediaCodec.stop();

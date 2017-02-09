@@ -165,7 +165,9 @@ public class VideoDecoder extends MediaDecoder {
     @Override
     public void startSeeking() throws IOException {
         super.startSeeking();
-        setState(STATE_STOPPED);
+        Log.d(TAG, "start seeking state is: " + mState);
+        if (mState == STATE_SEEKING)
+            return;
         prepare();
         setState(STATE_SEEKING);
         mInputDone = mOutputDone = false;
