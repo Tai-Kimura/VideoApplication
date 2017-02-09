@@ -11,7 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb0af9ce-362c-4b54-84f3-5de565297ea3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/1.0.3/videolibrary-1.0.3.aar" afterPath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/1.0.3/videolibrary-1.0.3.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/1.0.3/videolibrary-1.0.3.aar.md5" afterPath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/1.0.3/videolibrary-1.0.3.aar.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/1.0.3/videolibrary-1.0.3.aar.sha1" afterPath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/1.0.3/videolibrary-1.0.3.aar.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml" afterPath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml.md5" afterPath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml.sha1" afterPath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml.sha1" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java" afterPath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java" />
     </list>
     <ignored path="VideoApplication.iws" />
@@ -102,25 +107,24 @@
       <file leaf-file-name="MediaDecoder.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1232">
-              <caret line="319" column="13" selection-start-line="319" selection-start-column="13" selection-end-line="319" selection-end-column="13" />
+            <state relative-caret-position="62">
+              <caret line="289" column="9" selection-start-line="289" selection-start-column="9" selection-end-line="289" selection-end-column="9" />
               <folding>
-                <element signature="e#0#16308#0" expanded="true" />
+                <element signature="e#0#16307#0" expanded="true" />
                 <element signature="imports" expanded="true" />
                 <element signature="e#2005#2006#0" expanded="true" />
                 <element signature="e#2034#2035#0" expanded="true" />
                 <element signature="e#7835#9914#0" expanded="true" />
-                <element signature="e#9913#9914#0" expanded="true" />
-                <marker date="1486612891000" expanded="false" signature="1877:1888" ph=" { " />
-                <marker date="1486612891000" expanded="false" signature="1906:1912" ph=" }" />
-                <marker date="1486612891000" expanded="false" signature="2652:2663" ph=" { " />
-                <marker date="1486612891000" expanded="false" signature="2682:2688" ph=" }" />
-                <marker date="1486612891000" expanded="false" signature="2894:2905" ph=" { " />
-                <marker date="1486612891000" expanded="false" signature="2929:2935" ph=" }" />
-                <marker date="1486612891000" expanded="false" signature="3474:3485" ph=" { " />
-                <marker date="1486612891000" expanded="false" signature="3519:3525" ph=" }" />
-                <marker date="1486612891000" expanded="false" signature="3579:3590" ph=" { " />
-                <marker date="1486612891000" expanded="false" signature="3613:3619" ph=" }" />
+                <marker date="1486613623000" expanded="false" signature="1877:1888" ph=" { " />
+                <marker date="1486613623000" expanded="false" signature="1906:1912" ph=" }" />
+                <marker date="1486613623000" expanded="false" signature="2652:2663" ph=" { " />
+                <marker date="1486613623000" expanded="false" signature="2682:2688" ph=" }" />
+                <marker date="1486613623000" expanded="false" signature="2894:2905" ph=" { " />
+                <marker date="1486613623000" expanded="false" signature="2929:2935" ph=" }" />
+                <marker date="1486613623000" expanded="false" signature="3474:3485" ph=" { " />
+                <marker date="1486613623000" expanded="false" signature="3519:3525" ph=" }" />
+                <marker date="1486613623000" expanded="false" signature="3579:3590" ph=" { " />
+                <marker date="1486613623000" expanded="false" signature="3613:3619" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -3467,7 +3471,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3799,25 +3803,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1232">
-          <caret line="319" column="13" selection-start-line="319" selection-start-column="13" selection-end-line="319" selection-end-column="13" />
+        <state relative-caret-position="62">
+          <caret line="289" column="9" selection-start-line="289" selection-start-column="9" selection-end-line="289" selection-end-column="9" />
           <folding>
-            <element signature="e#0#16308#0" expanded="true" />
+            <element signature="e#0#16307#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#2005#2006#0" expanded="true" />
             <element signature="e#2034#2035#0" expanded="true" />
             <element signature="e#7835#9914#0" expanded="true" />
-            <element signature="e#9913#9914#0" expanded="true" />
-            <marker date="1486612891000" expanded="false" signature="1877:1888" ph=" { " />
-            <marker date="1486612891000" expanded="false" signature="1906:1912" ph=" }" />
-            <marker date="1486612891000" expanded="false" signature="2652:2663" ph=" { " />
-            <marker date="1486612891000" expanded="false" signature="2682:2688" ph=" }" />
-            <marker date="1486612891000" expanded="false" signature="2894:2905" ph=" { " />
-            <marker date="1486612891000" expanded="false" signature="2929:2935" ph=" }" />
-            <marker date="1486612891000" expanded="false" signature="3474:3485" ph=" { " />
-            <marker date="1486612891000" expanded="false" signature="3519:3525" ph=" }" />
-            <marker date="1486612891000" expanded="false" signature="3579:3590" ph=" { " />
-            <marker date="1486612891000" expanded="false" signature="3613:3619" ph=" }" />
+            <marker date="1486613623000" expanded="false" signature="1877:1888" ph=" { " />
+            <marker date="1486613623000" expanded="false" signature="1906:1912" ph=" }" />
+            <marker date="1486613623000" expanded="false" signature="2652:2663" ph=" { " />
+            <marker date="1486613623000" expanded="false" signature="2682:2688" ph=" }" />
+            <marker date="1486613623000" expanded="false" signature="2894:2905" ph=" { " />
+            <marker date="1486613623000" expanded="false" signature="2929:2935" ph=" }" />
+            <marker date="1486613623000" expanded="false" signature="3474:3485" ph=" { " />
+            <marker date="1486613623000" expanded="false" signature="3519:3525" ph=" }" />
+            <marker date="1486613623000" expanded="false" signature="3579:3590" ph=" { " />
+            <marker date="1486613623000" expanded="false" signature="3613:3619" ph=" }" />
           </folding>
         </state>
       </provider>
