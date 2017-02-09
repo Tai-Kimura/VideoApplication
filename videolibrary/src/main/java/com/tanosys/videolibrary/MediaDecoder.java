@@ -149,9 +149,8 @@ public abstract class MediaDecoder {
     }
 
     protected void prepare() throws IOException {
-        if (mState < STATE_PREPARED) {
-            mState = STATE_PREPARED;
-        } else {
+        Log.d(TAG, TRACK_TYPE + "'s state is " + mState);
+        if (mState > STATE_PREPARED) {
             configure();
         }
     }
@@ -159,11 +158,7 @@ public abstract class MediaDecoder {
     void startPlaying() throws IOException, IllegalStateException {
         synchronized (mWeakPlayer.get().getSync()) {
             mInputDone = mOutputDone = false;
-            try {
-                prepare();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            prepare();
             setState(STATE_PLAYING);
             mMediaCodec.start();
             Thread thread = new Thread(mRunnable, getClass().getSimpleName());

@@ -83,6 +83,7 @@ public class AudioDecoder extends MediaDecoder {
             mMediaCodec = MediaCodec.createDecoderByType(mime);
 //            mMediaCodec.setCallback(mCallback);
             mMediaCodec.configure(format, null, null, 0);
+            setState(STATE_PREPARED);
         }
         super.prepare();
     }

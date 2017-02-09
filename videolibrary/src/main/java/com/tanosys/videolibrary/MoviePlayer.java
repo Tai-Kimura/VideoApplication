@@ -157,6 +157,7 @@ public class MoviePlayer {
      * frameCallback.
      */
     public void play() {
+        Log.d(TAG, "play");
         synchronized (mSync) {
             if (isPaused()) {
                 try {
@@ -164,7 +165,13 @@ public class MoviePlayer {
                     mAudioDecoder.startPlaying();
                     mProgressHandler = new Handler(Looper.getMainLooper());
                     mProgressHandler.post(mProgressRunnable);
-                } catch (Exception e) {
+                } catch (IllegalStateException e) {
+                    Log.e(TAG, "failed to play: " + e.getMessage());
+                    Log.e(TAG, "video failed to play: " + mVideoDecoder.getState());
+                    Log.e(TAG, "audio failed to play: " + mAudioDecoder.getState());
+                    mVideoDecoder.stop();
+                    mAudioDecoder.stop();
+                } catch (IOException e) {
                     Log.e(TAG, "failed to play: " + e.getMessage());
                     mVideoDecoder.stop();
                     mAudioDecoder.stop();
@@ -274,16 +281,15 @@ public class MoviePlayer {
     public void startSeek() {
         synchronized (mSync) {
             mPlayWhenDoneSeek = isPlaying();
-            if (isPlaying()) {
+            if (!isPaused()) {
                 mAudioDecoder.requestSeek();
                 mVideoDecoder.requestSeek();
             } else if (mVideoDecoder.getState() != STATE_SEEKING && mAudioDecoder.getState() != STATE_SEEKING) {
                 try {
                     mVideoDecoder.startSeeking();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.d(TAG, "error when start seek");
                 }
-                mVideoDecoder.setState(STATE_SEEKING);
                 mAudioDecoder.setState(STATE_SEEKING);
             }
             mSync.notifyAll();
@@ -324,7 +330,7 @@ public class MoviePlayer {
     Runnable mProgressRunnable = new Runnable() {
         @Override
         public void run() {
-            if (isPlaying()) {
+            if (isPlaying() || isRequestingStateChange()) {
                 long time;
                 long videoPresentTime = mVideoDecoder.getExtractor().getSampleTime() / 1000;
                 long audioPresentTime = mAudioDecoder.getExtractor().getSampleTime() / 1000;
