@@ -236,8 +236,9 @@ public class MoviePlayer {
                 }
                 mVideoDecoder.setState(STATE_STOPPED);
                 mAudioDecoder.setState(STATE_STOPPED);
-                mVideoDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
-                mAudioDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
+                long sampleTime = mVideoDecoder.getSeekTargetTime();
+                mVideoDecoder.getExtractor().seekTo(sampleTime, SEEK_TO_CLOSEST_SYNC);
+                mAudioDecoder.getExtractor().seekTo(sampleTime, SEEK_TO_CLOSEST_SYNC);
                 if (mPlayWhenDoneSeek) {
                     try {
                         mVideoDecoder.startPlaying();
@@ -281,10 +282,12 @@ public class MoviePlayer {
     public void startSeek() {
         synchronized (mSync) {
             mPlayWhenDoneSeek = isPlaying();
-            if (!isPaused()) {
+            if (!isPaused() && !isSeeking()) {
+                Log.d(TAG, "start seeking with: request Seek");
                 mAudioDecoder.requestSeek();
                 mVideoDecoder.requestSeek();
-            } else if (mVideoDecoder.getState() != STATE_SEEKING && mAudioDecoder.getState() != STATE_SEEKING) {
+            } else if (!isSeeking()) {
+                Log.d(TAG, "start seeking with: seeking");
                 try {
                     mVideoDecoder.startSeeking();
                 } catch (IOException e) {

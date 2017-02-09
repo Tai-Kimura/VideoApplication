@@ -40,6 +40,11 @@ public class VideoDecoder extends MediaDecoder {
     private static final String TAG = "VideoDecoder";
     private int mVideoWidth;
     private int mVideoHeight;
+
+    public long getSeekTargetTime() {
+        return mSeekTargetTime;
+    }
+
     private long mSeekTargetTime = -1;
     private int mSeekDirection = 0;
     private long mLastSyncFrameTime = -1;
@@ -157,8 +162,9 @@ public class VideoDecoder extends MediaDecoder {
         mMediaCodec.configure(format, mOutputSurface.get(), null, 0);
     }
 
+    @Override
     public void startSeeking() throws IOException {
-        Log.d(TAG, "start seeking");
+        super.startSeeking();
         setState(STATE_STOPPED);
         prepare();
         setState(STATE_SEEKING);

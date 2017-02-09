@@ -183,10 +183,24 @@ public abstract class MediaDecoder {
 
     protected void requestSeek() {
         synchronized (mWeakPlayer.get().getSync()) {
-            setState(STATE_REQUEST_SEEK);
-            if (DEBUG) Log.v(TAG, "request seek");
+            if (mState == STATE_SEEKING)
+                return;
+            if (mDecodingThread != null && mDecodingThread.get() != null && mDecodingThread.get().isAlive()) {
+                setState(STATE_REQUEST_SEEK);
+                if (DEBUG) Log.v(TAG, "request seek");
+            } else {
+                try {
+                    startSeeking();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             mWeakPlayer.get().getSync().notify();
         }
+    }
+
+    public void startSeeking() throws IOException {
+        Log.d(TAG, TRACK_TYPE + "start seeking");
     }
 
     protected void stop() {
