@@ -361,4 +361,12 @@ public class MoviePlayer {
     public interface ProgressListener {
         void onProgressChange(float progress);
     }
+
+    public int getVideoWidth() {
+        return mVideoDecoder != null ? mVideoDecoder.getVideoWidth() : 0;
+    }
+
+    public int getVideoHeight() {
+        return mVideoDecoder != null ? mVideoDecoder.getVideoHeight() : 0;
+    }
 }

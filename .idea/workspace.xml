@@ -10,12 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb0af9ce-362c-4b54-84f3-5de565297ea3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml" afterPath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml.md5" afterPath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml.sha1" afterPath="$PROJECT_DIR$/repository/com/tanosys/videolibrary/maven-metadata.xml.sha1" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/build.gradle" afterPath="$PROJECT_DIR$/videolibrary/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/AudioDecoder.java" afterPath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/AudioDecoder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java" afterPath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java" afterPath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java" afterPath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/videolibrary.iml" afterPath="$PROJECT_DIR$/videolibrary/videolibrary.iml" />
     </list>
     <ignored path="VideoApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,7 +53,7 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/videolibrary/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
+            <state relative-caret-position="630">
               <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
               <folding />
             </state>
@@ -81,10 +83,14 @@
       <file leaf-file-name="AudioDecoder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/AudioDecoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-132">
+            <state relative-caret-position="270">
               <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#5272#0" expanded="false" />
+                <element signature="e#4945#4946#0" expanded="false" />
+                <element signature="e#4987#4988#0" expanded="false" />
+                <element signature="e#5037#5038#0" expanded="false" />
+                <element signature="e#5075#5076#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -93,12 +99,11 @@
       <file leaf-file-name="VideoPlayActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tanosys/videoapplication/VideoPlayActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1771">
-              <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+            <state relative-caret-position="1920">
+              <caret line="192" column="14" selection-start-line="192" selection-start-column="14" selection-end-line="192" selection-end-column="14" />
               <folding>
                 <element signature="e#0#6552#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <marker date="1486607011000" expanded="false" signature="1630:1725" ph="(view) → {" />
               </folding>
             </state>
           </provider>
@@ -107,31 +112,21 @@
       <file leaf-file-name="MediaDecoder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1963">
+            <state relative-caret-position="4410">
               <caret line="333" column="26" selection-start-line="333" selection-start-column="26" selection-end-line="333" selection-end-column="26" />
               <folding>
-                <element signature="e#0#18258#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-                <element signature="e#2060#2061#0" expanded="true" />
-                <element signature="e#2089#2090#0" expanded="true" />
-                <element signature="e#8883#10909#0" expanded="true" />
-                <element signature="e#10908#10909#0" expanded="true" />
-                <element signature="e#17458#17459#0" expanded="true" />
-                <element signature="e#17538#17539#0" expanded="true" />
-                <element signature="e#17572#17573#0" expanded="true" />
-                <element signature="e#17652#17653#0" expanded="true" />
-                <element signature="e#18059#18060#0" expanded="true" />
-                <element signature="e#18139#18140#0" expanded="true" />
-                <marker date="1486636224000" expanded="false" signature="1932:1943" ph=" { " />
-                <marker date="1486636224000" expanded="false" signature="1961:1967" ph=" }" />
-                <marker date="1486636224000" expanded="false" signature="2776:2787" ph=" { " />
-                <marker date="1486636224000" expanded="false" signature="2806:2812" ph=" }" />
-                <marker date="1486636224000" expanded="false" signature="3018:3029" ph=" { " />
-                <marker date="1486636224000" expanded="false" signature="3053:3059" ph=" }" />
-                <marker date="1486636224000" expanded="false" signature="3598:3609" ph=" { " />
-                <marker date="1486636224000" expanded="false" signature="3643:3649" ph=" }" />
-                <marker date="1486636224000" expanded="false" signature="3703:3714" ph=" { " />
-                <marker date="1486636224000" expanded="false" signature="3737:3743" ph=" }" />
+                <element signature="e#1933#1934#0" expanded="false" />
+                <element signature="e#1966#1967#0" expanded="false" />
+                <element signature="e#2777#2778#0" expanded="false" />
+                <element signature="e#2811#2812#0" expanded="false" />
+                <element signature="e#3019#3020#0" expanded="false" />
+                <element signature="e#3058#3059#0" expanded="false" />
+                <element signature="e#3599#3600#0" expanded="false" />
+                <element signature="e#3648#3649#0" expanded="false" />
+                <element signature="e#3704#3705#0" expanded="false" />
+                <element signature="e#3742#3743#0" expanded="false" />
+                <element signature="e#15815#15816#0" expanded="false" />
+                <element signature="e#15839#15840#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -140,11 +135,59 @@
       <file leaf-file-name="Thread.java" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-24/java/lang/Thread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
+            <state relative-caret-position="14490">
               <caret line="1027" column="25" selection-start-line="1027" selection-start-column="25" selection-end-line="1027" selection-end-column="25" />
               <folding>
-                <element signature="e#41151#41152#0" expanded="true" />
-                <element signature="e#41189#41190#0" expanded="true" />
+                <element signature="e#0#85488#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#6764#6765#0" expanded="false" />
+                <element signature="e#6805#6806#0" expanded="false" />
+                <element signature="e#7887#7888#0" expanded="false" />
+                <element signature="e#7927#7928#0" expanded="false" />
+                <element signature="e#15157#15158#0" expanded="false" />
+                <element signature="e#15221#15222#0" expanded="false" />
+                <element signature="e#15841#15842#0" expanded="false" />
+                <element signature="e#15907#15908#0" expanded="false" />
+                <element signature="e#17490#17491#0" expanded="false" />
+                <element signature="e#17531#17532#0" expanded="false" />
+                <element signature="e#18449#18450#0" expanded="false" />
+                <element signature="e#18491#18492#0" expanded="false" />
+                <element signature="e#20155#20156#0" expanded="false" />
+                <element signature="e#20198#20199#0" expanded="false" />
+                <element signature="e#22498#22499#0" expanded="false" />
+                <element signature="e#22542#22543#0" expanded="false" />
+                <element signature="e#33346#33347#0" expanded="false" />
+                <element signature="e#33385#33386#0" expanded="false" />
+                <element signature="e#35989#35990#0" expanded="false" />
+                <element signature="e#36046#36047#0" expanded="false" />
+                <element signature="e#40820#40821#0" expanded="false" />
+                <element signature="e#40877#40878#0" expanded="false" />
+                <element signature="e#42524#42525#0" expanded="false" />
+                <element signature="e#42581#42582#0" expanded="false" />
+                <element signature="e#43579#43580#0" expanded="false" />
+                <element signature="e#43636#43637#0" expanded="false" />
+                <element signature="e#45417#45418#0" expanded="false" />
+                <element signature="e#45448#45449#0" expanded="false" />
+                <element signature="e#46458#46459#0" expanded="false" />
+                <element signature="e#46485#46486#0" expanded="false" />
+                <element signature="e#47785#47786#0" expanded="false" />
+                <element signature="e#47854#47855#0" expanded="false" />
+                <element signature="e#49787#49788#0" expanded="false" />
+                <element signature="e#49832#49833#0" expanded="false" />
+                <element signature="e#53818#53819#0" expanded="false" />
+                <element signature="e#53880#53881#0" expanded="false" />
+                <element signature="e#54974#54975#0" expanded="false" />
+                <element signature="e#55003#55004#0" expanded="false" />
+                <element signature="e#57500#57501#0" expanded="false" />
+                <element signature="e#57541#57542#0" expanded="false" />
+                <element signature="e#58599#58600#0" expanded="false" />
+                <element signature="e#58638#58639#0" expanded="false" />
+                <element signature="e#59285#59286#0" expanded="false" />
+                <element signature="e#59344#59345#0" expanded="false" />
+                <element signature="e#66859#66860#0" expanded="false" />
+                <element signature="e#66885#66886#0" expanded="false" />
+                <element signature="e#77741#77742#0" expanded="false" />
+                <element signature="e#77776#77777#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -153,9 +196,32 @@
       <file leaf-file-name="MediaCodec.java" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-24/android/media/MediaCodec.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1484">
+            <state relative-caret-position="44895">
               <caret line="3046" column="21" selection-start-line="3046" selection-start-column="11" selection-end-line="3046" selection-end-column="21" />
-              <folding />
+              <folding>
+                <element signature="e#0#137875#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#64674#64675#0" expanded="false" />
+                <element signature="e#64707#64708#0" expanded="false" />
+                <element signature="e#77256#77257#0" expanded="false" />
+                <element signature="e#77318#77319#0" expanded="false" />
+                <element signature="e#77534#77535#0" expanded="false" />
+                <element signature="e#77598#77599#0" expanded="false" />
+                <element signature="e#77727#77728#0" expanded="false" />
+                <element signature="e#77768#77769#0" expanded="false" />
+                <element signature="e#78094#78095#0" expanded="false" />
+                <element signature="e#78140#78141#0" expanded="false" />
+                <element signature="e#81961#81962#0" expanded="false" />
+                <element signature="e#82002#82003#0" expanded="false" />
+                <element signature="e#89665#89666#0" expanded="false" />
+                <element signature="e#89715#89716#0" expanded="false" />
+                <element signature="e#89878#89879#0" expanded="false" />
+                <element signature="e#89931#89932#0" expanded="false" />
+                <element signature="e#91040#91041#0" expanded="false" />
+                <element signature="e#91084#91085#0" expanded="false" />
+                <element signature="e#131012#131013#0" expanded="false" />
+                <element signature="e#131071#131072#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -163,26 +229,12 @@
       <file leaf-file-name="MoviePlayer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="317" column="36" selection-start-line="317" selection-start-column="36" selection-end-line="317" selection-end-column="36" />
+            <state relative-caret-position="584">
+              <caret line="369" column="69" selection-start-line="369" selection-start-column="69" selection-end-line="369" selection-end-column="69" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1596#1597#0" expanded="true" />
-                <element signature="e#1642#1643#0" expanded="true" />
-                <element signature="e#1929#1930#0" expanded="true" />
-                <element signature="e#1957#1958#0" expanded="true" />
-                <element signature="e#2034#2035#0" expanded="true" />
-                <element signature="e#2066#2067#0" expanded="true" />
-                <element signature="e#4197#4198#0" expanded="true" />
-                <element signature="e#4274#4275#0" expanded="true" />
-                <element signature="e#4473#4474#0" expanded="true" />
-                <element signature="e#4550#4551#0" expanded="true" />
-                <element signature="e#11727#11728#0" expanded="true" />
-                <element signature="e#11759#11760#0" expanded="true" />
-                <element signature="e#11800#11801#0" expanded="true" />
-                <element signature="e#11858#11859#0" expanded="true" />
-                <element signature="e#11925#13263#0" expanded="true" />
-                <element signature="e#13262#13263#0" expanded="true" />
+                <element signature="e#13391#13392#0" expanded="true" />
+                <element signature="e#13471#13472#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -191,14 +243,10 @@
       <file leaf-file-name="VideoDecoder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="209" column="16" selection-start-line="209" selection-start-column="16" selection-end-line="209" selection-end-column="16" />
+            <state relative-caret-position="60">
+              <caret line="39" column="53" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
               <folding>
-                <element signature="e#0#8894#0" expanded="true" />
-                <element signature="e#1456#1457#0" expanded="true" />
-                <element signature="e#1494#1495#0" expanded="true" />
-                <element signature="e#8245#8890#0" expanded="true" />
-                <element signature="e#8889#8890#0" expanded="true" />
+                <element signature="e#0#8895#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2597,7 +2645,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5946039159000" />
+        <entry key="$PROJECT_DIR$" value="5946111699000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2982,9 +3030,9 @@
         <option value="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/tanosys/videoapplication/VideoPlayActivity.java" />
-        <option value="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java" />
         <option value="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/AudioDecoder.java" />
         <option value="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java" />
+        <option value="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java" />
         <option value="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java" />
         <option value="$PROJECT_DIR$/videolibrary/build.gradle" />
       </list>
@@ -3020,10 +3068,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -3100,6 +3146,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3468,31 +3516,30 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58002937" sideWeight="0.50858366" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58002937" sideWeight="0.4914163" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Fabric" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -3500,6 +3547,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -3725,37 +3773,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-24/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="1027" column="25" selection-start-line="1027" selection-start-column="25" selection-end-line="1027" selection-end-column="25" />
-          <folding>
-            <element signature="e#41151#41152#0" expanded="true" />
-            <element signature="e#41189#41190#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-24/android/media/MediaCodec.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1484">
-          <caret line="3046" column="21" selection-start-line="3046" selection-start-column="11" selection-end-line="3046" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tanosys/videoapplication/VideoPlayActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1771">
-          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#6552#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <marker date="1486607011000" expanded="false" signature="1630:1725" ph="(view) → {" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3766,9 +3783,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/AudioDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-132">
+        <state relative-caret-position="270">
           <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
           <folding>
+            <element signature="e#0#5272#0" expanded="false" />
+            <element signature="e#4945#4946#0" expanded="false" />
+            <element signature="e#4987#4988#0" expanded="false" />
+            <element signature="e#5037#5038#0" expanded="false" />
+            <element signature="e#5075#5076#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tanosys/videoapplication/VideoPlayActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1920">
+          <caret line="192" column="14" selection-start-line="192" selection-start-column="14" selection-end-line="192" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#6552#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -3776,78 +3808,140 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1963">
+        <state relative-caret-position="4410">
           <caret line="333" column="26" selection-start-line="333" selection-start-column="26" selection-end-line="333" selection-end-column="26" />
           <folding>
-            <element signature="e#0#18258#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#2060#2061#0" expanded="true" />
-            <element signature="e#2089#2090#0" expanded="true" />
-            <element signature="e#8883#10909#0" expanded="true" />
-            <element signature="e#10908#10909#0" expanded="true" />
-            <element signature="e#17458#17459#0" expanded="true" />
-            <element signature="e#17538#17539#0" expanded="true" />
-            <element signature="e#17572#17573#0" expanded="true" />
-            <element signature="e#17652#17653#0" expanded="true" />
-            <element signature="e#18059#18060#0" expanded="true" />
-            <element signature="e#18139#18140#0" expanded="true" />
-            <marker date="1486636224000" expanded="false" signature="1932:1943" ph=" { " />
-            <marker date="1486636224000" expanded="false" signature="1961:1967" ph=" }" />
-            <marker date="1486636224000" expanded="false" signature="2776:2787" ph=" { " />
-            <marker date="1486636224000" expanded="false" signature="2806:2812" ph=" }" />
-            <marker date="1486636224000" expanded="false" signature="3018:3029" ph=" { " />
-            <marker date="1486636224000" expanded="false" signature="3053:3059" ph=" }" />
-            <marker date="1486636224000" expanded="false" signature="3598:3609" ph=" { " />
-            <marker date="1486636224000" expanded="false" signature="3643:3649" ph=" }" />
-            <marker date="1486636224000" expanded="false" signature="3703:3714" ph=" { " />
-            <marker date="1486636224000" expanded="false" signature="3737:3743" ph=" }" />
+            <element signature="e#1933#1934#0" expanded="false" />
+            <element signature="e#1966#1967#0" expanded="false" />
+            <element signature="e#2777#2778#0" expanded="false" />
+            <element signature="e#2811#2812#0" expanded="false" />
+            <element signature="e#3019#3020#0" expanded="false" />
+            <element signature="e#3058#3059#0" expanded="false" />
+            <element signature="e#3599#3600#0" expanded="false" />
+            <element signature="e#3648#3649#0" expanded="false" />
+            <element signature="e#3704#3705#0" expanded="false" />
+            <element signature="e#3742#3743#0" expanded="false" />
+            <element signature="e#15815#15816#0" expanded="false" />
+            <element signature="e#15839#15840#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java">
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-24/java/lang/Thread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="317" column="36" selection-start-line="317" selection-start-column="36" selection-end-line="317" selection-end-column="36" />
+        <state relative-caret-position="14490">
+          <caret line="1027" column="25" selection-start-line="1027" selection-start-column="25" selection-end-line="1027" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1596#1597#0" expanded="true" />
-            <element signature="e#1642#1643#0" expanded="true" />
-            <element signature="e#1929#1930#0" expanded="true" />
-            <element signature="e#1957#1958#0" expanded="true" />
-            <element signature="e#2034#2035#0" expanded="true" />
-            <element signature="e#2066#2067#0" expanded="true" />
-            <element signature="e#4197#4198#0" expanded="true" />
-            <element signature="e#4274#4275#0" expanded="true" />
-            <element signature="e#4473#4474#0" expanded="true" />
-            <element signature="e#4550#4551#0" expanded="true" />
-            <element signature="e#11727#11728#0" expanded="true" />
-            <element signature="e#11759#11760#0" expanded="true" />
-            <element signature="e#11800#11801#0" expanded="true" />
-            <element signature="e#11858#11859#0" expanded="true" />
-            <element signature="e#11925#13263#0" expanded="true" />
-            <element signature="e#13262#13263#0" expanded="true" />
+            <element signature="e#0#85488#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#6764#6765#0" expanded="false" />
+            <element signature="e#6805#6806#0" expanded="false" />
+            <element signature="e#7887#7888#0" expanded="false" />
+            <element signature="e#7927#7928#0" expanded="false" />
+            <element signature="e#15157#15158#0" expanded="false" />
+            <element signature="e#15221#15222#0" expanded="false" />
+            <element signature="e#15841#15842#0" expanded="false" />
+            <element signature="e#15907#15908#0" expanded="false" />
+            <element signature="e#17490#17491#0" expanded="false" />
+            <element signature="e#17531#17532#0" expanded="false" />
+            <element signature="e#18449#18450#0" expanded="false" />
+            <element signature="e#18491#18492#0" expanded="false" />
+            <element signature="e#20155#20156#0" expanded="false" />
+            <element signature="e#20198#20199#0" expanded="false" />
+            <element signature="e#22498#22499#0" expanded="false" />
+            <element signature="e#22542#22543#0" expanded="false" />
+            <element signature="e#33346#33347#0" expanded="false" />
+            <element signature="e#33385#33386#0" expanded="false" />
+            <element signature="e#35989#35990#0" expanded="false" />
+            <element signature="e#36046#36047#0" expanded="false" />
+            <element signature="e#40820#40821#0" expanded="false" />
+            <element signature="e#40877#40878#0" expanded="false" />
+            <element signature="e#42524#42525#0" expanded="false" />
+            <element signature="e#42581#42582#0" expanded="false" />
+            <element signature="e#43579#43580#0" expanded="false" />
+            <element signature="e#43636#43637#0" expanded="false" />
+            <element signature="e#45417#45418#0" expanded="false" />
+            <element signature="e#45448#45449#0" expanded="false" />
+            <element signature="e#46458#46459#0" expanded="false" />
+            <element signature="e#46485#46486#0" expanded="false" />
+            <element signature="e#47785#47786#0" expanded="false" />
+            <element signature="e#47854#47855#0" expanded="false" />
+            <element signature="e#49787#49788#0" expanded="false" />
+            <element signature="e#49832#49833#0" expanded="false" />
+            <element signature="e#53818#53819#0" expanded="false" />
+            <element signature="e#53880#53881#0" expanded="false" />
+            <element signature="e#54974#54975#0" expanded="false" />
+            <element signature="e#55003#55004#0" expanded="false" />
+            <element signature="e#57500#57501#0" expanded="false" />
+            <element signature="e#57541#57542#0" expanded="false" />
+            <element signature="e#58599#58600#0" expanded="false" />
+            <element signature="e#58638#58639#0" expanded="false" />
+            <element signature="e#59285#59286#0" expanded="false" />
+            <element signature="e#59344#59345#0" expanded="false" />
+            <element signature="e#66859#66860#0" expanded="false" />
+            <element signature="e#66885#66886#0" expanded="false" />
+            <element signature="e#77741#77742#0" expanded="false" />
+            <element signature="e#77776#77777#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-24/android/media/MediaCodec.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44895">
+          <caret line="3046" column="21" selection-start-line="3046" selection-start-column="11" selection-end-line="3046" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#137875#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#64674#64675#0" expanded="false" />
+            <element signature="e#64707#64708#0" expanded="false" />
+            <element signature="e#77256#77257#0" expanded="false" />
+            <element signature="e#77318#77319#0" expanded="false" />
+            <element signature="e#77534#77535#0" expanded="false" />
+            <element signature="e#77598#77599#0" expanded="false" />
+            <element signature="e#77727#77728#0" expanded="false" />
+            <element signature="e#77768#77769#0" expanded="false" />
+            <element signature="e#78094#78095#0" expanded="false" />
+            <element signature="e#78140#78141#0" expanded="false" />
+            <element signature="e#81961#81962#0" expanded="false" />
+            <element signature="e#82002#82003#0" expanded="false" />
+            <element signature="e#89665#89666#0" expanded="false" />
+            <element signature="e#89715#89716#0" expanded="false" />
+            <element signature="e#89878#89879#0" expanded="false" />
+            <element signature="e#89931#89932#0" expanded="false" />
+            <element signature="e#91040#91041#0" expanded="false" />
+            <element signature="e#91084#91085#0" expanded="false" />
+            <element signature="e#131012#131013#0" expanded="false" />
+            <element signature="e#131071#131072#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="209" column="16" selection-start-line="209" selection-start-column="16" selection-end-line="209" selection-end-column="16" />
+        <state relative-caret-position="60">
+          <caret line="39" column="53" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
           <folding>
-            <element signature="e#0#8894#0" expanded="true" />
-            <element signature="e#1456#1457#0" expanded="true" />
-            <element signature="e#1494#1495#0" expanded="true" />
-            <element signature="e#8245#8890#0" expanded="true" />
-            <element signature="e#8889#8890#0" expanded="true" />
+            <element signature="e#0#8895#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="584">
+          <caret line="369" column="69" selection-start-line="369" selection-start-column="69" selection-end-line="369" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13391#13392#0" expanded="true" />
+            <element signature="e#13471#13472#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/videolibrary/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
+        <state relative-caret-position="630">
           <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
           <folding />
         </state>

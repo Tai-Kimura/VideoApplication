@@ -38,6 +38,7 @@ public class VideoDecoder extends MediaDecoder {
     protected static final int SEEK_DIRECTION_BACKWARD = 2;
     protected static final long CLOSE_ENOUGH_TIME = 100000;
     private static final String TAG = "VideoDecoder";
+
     private int mVideoWidth;
     private int mVideoHeight;
 
