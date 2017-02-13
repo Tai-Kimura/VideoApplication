@@ -36,7 +36,7 @@ import static android.media.MediaExtractor.SEEK_TO_CLOSEST_SYNC;
  */
 
 public abstract class MediaDecoder {
-    private static final int TIMEOUT_USEC = 100000;
+    private static final int TIMEOUT_USEC = 10000;
     public static final int STATE_NO_TRACK_FOUND = -2;
     public static final int STATE_UNINITIALIZED = -1;
     public static final int STATE_INITIALIZED = 0;
@@ -302,6 +302,8 @@ public abstract class MediaDecoder {
                         mInputDone = mOutputDone = true;
                         Log.d(TAG, TRACK_TYPE + " state is " + mState);
                         if (mState == STATE_PLAYING) {
+                            releaseCodec();
+                            prepare();
                             setState(STATE_WAITING_FOR_LOOP);
                             mExtractor.seekTo(0, SEEK_TO_CLOSEST_SYNC);
                         } else if (mState == STATE_REQUEST_CHANGE_RATE) {
@@ -318,6 +320,13 @@ public abstract class MediaDecoder {
                 }
             } catch (IllegalStateException e) {
                 Log.d(TAG, "cant continue playing: " + e.getMessage());
+                synchronized (mWeakPlayer.get().getSync()) {
+                    setState(STATE_ERROR);
+                    releaseCodec();
+                    mWeakPlayer.get().stop();
+                }
+            } catch (IOException e) {
+                Log.d(TAG, "cant prepare: " + e.getMessage());
                 synchronized (mWeakPlayer.get().getSync()) {
                     setState(STATE_ERROR);
                     releaseCodec();
