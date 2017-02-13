@@ -52,6 +52,8 @@ public abstract class MediaDecoder {
     public static final int STATE_END_SEEK = 10;
     public static final int STATE_ERROR = 99;
 
+    protected boolean mIsSeeking = false;
+    protected long mSeekTargetTime = -1;
 
     public MediaExtractor getExtractor() {
         return mExtractor;
@@ -286,9 +288,6 @@ public abstract class MediaDecoder {
                         break;
                     handleInput();
                     handleOutput();
-                    synchronized (mWeakPlayer.get().getSync()) {
-                        mWeakPlayer.get().getSync().notify();
-                    }
                 }
                 Log.d(TAG, TRACK_TYPE + " done io");
                 synchronized (mWeakPlayer.get().getSync()) {
@@ -327,6 +326,7 @@ public abstract class MediaDecoder {
     protected void handleInput() {
         if ((mState == STATE_PLAYING || mState == STATE_SEEKING) && !mInputDone) {
             final int inputBufIndex = mMediaCodec.dequeueInputBuffer(TIMEOUT_USEC);
+            Log.d(TAG, TRACK_TYPE + "input status: " + inputBufIndex);
             if (inputBufIndex == MediaCodec.INFO_TRY_AGAIN_LATER)
                 return;
             mInputDone = input(inputBufIndex);
@@ -377,27 +377,32 @@ public abstract class MediaDecoder {
             } else {
                 inputBuf = mMediaCodec.getInputBuffers()[inputBufIndex];
             }
-            if (mExtractor.getSampleTrackIndex() == mTrackIndex) {
-                int chunkSize = mExtractor.readSampleData(inputBuf, 0);
-                if (chunkSize <= 0) {
-                    if (mState != STATE_SEEKING) {
-                        mMediaCodec.queueInputBuffer(inputBufIndex, 0, 0, 0L,
-                                MediaCodec.BUFFER_FLAG_END_OF_STREAM);
-                        Log.d(TAG, "sent input EOS");
-                        return true;
-                    } else {
-                        return false;
-                    }
+            int chunkSize = mExtractor.readSampleData(inputBuf, 0);
+            if (chunkSize <= 0) {
+                if (mState != STATE_SEEKING) {
+                    mMediaCodec.queueInputBuffer(inputBufIndex, 0, 0, 0L,
+                            MediaCodec.BUFFER_FLAG_END_OF_STREAM);
+                    Log.d(TAG, "sent input EOS");
+                    return true;
                 } else {
-                    long presentationTimeUs = mExtractor.getSampleTime();
-                    Log.d(TAG, TRACK_TYPE + " time:" + presentationTimeUs);
-                    mMediaCodec.queueInputBuffer(inputBufIndex, 0, chunkSize,
-                            presentationTimeUs, 0 /*flags*/);
-                    boolean b = !mExtractor.advance();
-                    Log.d(TAG, TRACK_TYPE + " extractor advanced " + b);
-                    return mState != STATE_SEEKING ? b : false;
-//                    Log.d(TAG, "submitted frame " + presentationTimeUs);
+                    synchronized (mDecoderSync) {
+                        mIsSeeking = false;
+                        Log.d(TAG, "no chunk available: " + mSeekTargetTime);
+                        mMediaCodec.queueInputBuffer(inputBufIndex, 0, 0, 0L,
+                                0);
+                        mDecoderSync.notify();
+                    }
+                    return false;
                 }
+            } else {
+                long presentationTimeUs = mExtractor.getSampleTime();
+                Log.d(TAG, TRACK_TYPE + " time:" + presentationTimeUs);
+                mMediaCodec.queueInputBuffer(inputBufIndex, 0, chunkSize,
+                        presentationTimeUs, 0 /*flags*/);
+                boolean b = !mExtractor.advance();
+                Log.d(TAG, TRACK_TYPE + " extractor advanced " + b);
+                return mState != STATE_SEEKING ? b : false;
+//                    Log.d(TAG, "submitted frame " + presentationTimeUs);
             }
         }
         return true;

@@ -29,8 +29,6 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
-import static android.R.attr.rotation;
-
 /**
  * Created by like-a-rolling_stone on 2017/01/31.
  */
@@ -48,11 +46,9 @@ public class VideoDecoder extends MediaDecoder {
         return mSeekTargetTime;
     }
 
-    private long mSeekTargetTime = -1;
     private int mSeekDirection = 0;
     private long mLastSyncFrameTime = -1;
     private long mMaximumDifference = 0;
-    private boolean mIsSeeking = false;
     private boolean mShouldRetreatToIFrame = false;
 
     public int getVideoWidth() {
