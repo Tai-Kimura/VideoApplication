@@ -283,7 +283,7 @@ public abstract class MediaDecoder {
         @Override
         public void run() {
             try {
-                for (; mState == STATE_PLAYING && !mInputDone && !mOutputDone; ) {
+                for (; mState == STATE_PLAYING && !mOutputDone; ) {
                     if (Thread.currentThread().isInterrupted())
                         break;
                     handleInput();
@@ -302,8 +302,6 @@ public abstract class MediaDecoder {
                         mInputDone = mOutputDone = true;
                         Log.d(TAG, TRACK_TYPE + " state is " + mState);
                         if (mState == STATE_PLAYING) {
-                            releaseCodec();
-                            prepare();
                             setState(STATE_WAITING_FOR_LOOP);
                             mExtractor.seekTo(0, SEEK_TO_CLOSEST_SYNC);
                         } else if (mState == STATE_REQUEST_CHANGE_RATE) {
@@ -320,13 +318,6 @@ public abstract class MediaDecoder {
                 }
             } catch (IllegalStateException e) {
                 Log.d(TAG, "cant continue playing: " + e.getMessage());
-                synchronized (mWeakPlayer.get().getSync()) {
-                    setState(STATE_ERROR);
-                    releaseCodec();
-                    mWeakPlayer.get().stop();
-                }
-            } catch (IOException e) {
-                Log.d(TAG, "cant prepare: " + e.getMessage());
                 synchronized (mWeakPlayer.get().getSync()) {
                     setState(STATE_ERROR);
                     releaseCodec();
@@ -371,11 +362,12 @@ public abstract class MediaDecoder {
                 Log.d(TAG, TRACK_TYPE + " Out put");
                 output(decoderStatus, mBufferInfo);
             }
-            if ((mBufferInfo.flags & MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0 && mState != STATE_SEEKING) {
-                if (DEBUG) Log.d(TAG, TRACK_TYPE + ":output EOS");
+            if ((mBufferInfo.flags == MediaCodec.BUFFER_FLAG_END_OF_STREAM) && mState != STATE_SEEKING) {
+                Log.d(TAG, TRACK_TYPE + ":output EOS");
+                mBufferInfo = new MediaCodec.BufferInfo();
+                mOutputDone = true;
                 synchronized (mWeakPlayer.get().getSync()) {
-                    mOutputDone = true;
-                    mWeakPlayer.get().getSync().notifyAll();
+                    mWeakPlayer.get().getSync().notify();
                 }
             }
         }
@@ -395,7 +387,7 @@ public abstract class MediaDecoder {
                 if (mState != STATE_SEEKING) {
                     mMediaCodec.queueInputBuffer(inputBufIndex, 0, 0, 0L,
                             MediaCodec.BUFFER_FLAG_END_OF_STREAM);
-                    Log.d(TAG, "sent input EOS");
+                    Log.d(TAG, TRACK_TYPE + " sent input EOS");
                     return true;
                 } else {
                     synchronized (mDecoderSync) {
