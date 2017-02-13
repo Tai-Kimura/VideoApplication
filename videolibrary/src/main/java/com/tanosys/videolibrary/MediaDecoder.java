@@ -22,6 +22,7 @@ package com.tanosys.videolibrary;
 import android.media.MediaCodec;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
+import android.os.Build;
 import android.util.Log;
 
 import java.io.File;
@@ -303,7 +304,6 @@ public abstract class MediaDecoder {
                         Log.d(TAG, TRACK_TYPE + " state is " + mState);
                         if (mState == STATE_PLAYING) {
                             setState(STATE_WAITING_FOR_LOOP);
-                            mMediaCodec.flush();
                         } else if (mState == STATE_REQUEST_CHANGE_RATE) {
                             setState(STATE_CHANGE_RATE);
                         } else if (mState == STATE_REQUEST_STOP) {
@@ -312,6 +312,9 @@ public abstract class MediaDecoder {
                             Log.d(TAG, TRACK_TYPE + "'s new state is " + mState);
                         }
                         mMediaCodec.stop();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            mMediaCodec.reset();
+                        }
                         mWeakPlayer.get().getSync().notify();
                     }
                     if (mState == STATE_WAITING_FOR_LOOP) {
