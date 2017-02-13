@@ -290,11 +290,15 @@ public abstract class MediaDecoder {
                     handleOutput();
                 }
                 Log.d(TAG, TRACK_TYPE + " done io");
-                synchronized (mWeakPlayer.get().getSync()) {
-                    if (Thread.currentThread().isInterrupted()) {
+
+                if (Thread.currentThread().isInterrupted()) {
+                    synchronized (mWeakPlayer.get().getSync()) {
                         Log.d(TAG, "thread interrupted");
                         releaseCodec();
-                    } else {
+                        mWeakPlayer.get().getSync().notify();
+                    }
+                } else {
+                    synchronized (mWeakPlayer.get().getSync()) {
                         mInputDone = mOutputDone = true;
                         Log.d(TAG, TRACK_TYPE + " state is " + mState);
                         if (mState == STATE_PLAYING) {
@@ -308,9 +312,9 @@ public abstract class MediaDecoder {
                             Log.d(TAG, TRACK_TYPE + "'s new state is " + mState);
                         }
                         mMediaCodec.stop();
-                        mWeakPlayer.get().onStopped();
+                        mWeakPlayer.get().getSync().notify();
                     }
-                    mWeakPlayer.get().getSync().notify();
+                    mWeakPlayer.get().onStopped();
                 }
             } catch (IllegalStateException e) {
                 Log.d(TAG, "cant continue playing: " + e.getMessage());
@@ -348,18 +352,18 @@ public abstract class MediaDecoder {
             if (decoderStatus == MediaCodec.INFO_TRY_AGAIN_LATER) {
             } else if (decoderStatus == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
                 final MediaFormat newFormat = mMediaCodec.getOutputFormat();
-                if (DEBUG) Log.d(TAG, "video decoder output format changed: " + newFormat);
+                if (DEBUG) Log.d(TAG, TRACK_TYPE + " decoder output format changed: " + newFormat);
             } else if (decoderStatus == MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED) {
-                if (DEBUG) Log.d(TAG, "video decoder output buffer changed: ");
+                if (DEBUG) Log.d(TAG, TRACK_TYPE + " decoder output buffer changed: ");
             } else if (decoderStatus < 0) {
                 throw new RuntimeException(
-                        "unexpected result from video decoder.dequeueOutputBuffer: " + decoderStatus);
+                        "unexpected result from " + TRACK_TYPE + " decoder.dequeueOutputBuffer: " + decoderStatus);
             } else {
                 Log.d(TAG, TRACK_TYPE + " Out put");
                 output(decoderStatus, mBufferInfo);
             }
             if ((mBufferInfo.flags & MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0 && mState != STATE_SEEKING) {
-                if (DEBUG) Log.d(TAG, "video:output EOS");
+                if (DEBUG) Log.d(TAG, TRACK_TYPE + ":output EOS");
                 synchronized (mWeakPlayer.get().getSync()) {
                     mOutputDone = true;
                     mWeakPlayer.get().getSync().notifyAll();

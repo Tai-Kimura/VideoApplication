@@ -40,7 +40,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository url: "file://${repo.absolutePath}"
-            pom.version = '1.0.11'             // version
+            pom.version = '1.0.12'             // version
             pom.groupId = 'com.tanosys'    // グループ名
             pom.artifactId = 'videolibrary' // ライブラリ名
         }
