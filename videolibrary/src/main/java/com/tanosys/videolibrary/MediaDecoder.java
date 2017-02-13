@@ -166,10 +166,13 @@ public abstract class MediaDecoder {
         if (mState == STATE_NO_TRACK_FOUND)
             return;
         synchronized (mWeakPlayer.get().getSync()) {
+            if (mDecodingThread != null && mDecodingThread.get() != null)
+                mDecodingThread.get().interrupt();
+            mDecodingThread = null;
             mInputDone = mOutputDone = false;
             prepare();
-            setState(STATE_PLAYING);
             mMediaCodec.start();
+            setState(STATE_PLAYING);
             Thread thread = new Thread(mRunnable, getClass().getSimpleName());
             mDecodingThread = new WeakReference<>(thread);
             thread.start();
