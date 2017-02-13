@@ -29,6 +29,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
+import static android.R.attr.rotation;
+
 /**
  * Created by like-a-rolling_stone on 2017/01/31.
  */
@@ -102,7 +104,7 @@ public class VideoDecoder extends MediaDecoder {
                     mExtractor.seekTo(next, MediaExtractor.SEEK_TO_NEXT_SYNC);
                     mMaximumDifference = mExtractor.getSampleTime() - now;
                     Log.d(TAG, "iframe interval is: " + mMaximumDifference);
-                    next+=100;
+                    next += 100;
                     if (next > 10000) {
                         mMaximumDifference = 1000000;
                         break;
@@ -115,7 +117,13 @@ public class VideoDecoder extends MediaDecoder {
             String mime = format.getString(MediaFormat.KEY_MIME);
             mMediaCodec = MediaCodec.createDecoderByType(mime);
 //            mMediaCodec.setCallback(mCallback);
-            int rotation = format.getInteger(MediaFormat.KEY_ROTATION);
+            int rotation;
+            try {
+                rotation = format.getInteger(MediaFormat.KEY_ROTATION);
+            } catch (NullPointerException e) {
+                rotation = 0;
+            }
+
             mVideoWidth = format.getInteger(MediaFormat.KEY_WIDTH);
             mVideoHeight = format.getInteger(MediaFormat.KEY_HEIGHT);
             if ((rotation % 180) == 0) {

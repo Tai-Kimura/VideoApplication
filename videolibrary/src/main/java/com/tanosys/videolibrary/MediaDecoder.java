@@ -244,7 +244,7 @@ public abstract class MediaDecoder {
             } catch (Exception e) {
                 Log.e(TAG, "failed releasing MediaCodec", e);
             }
-        } else {
+        } else if (mState != STATE_UNINITIALIZED) {
             try {
                 prepare();
             } catch (IOException e) {
@@ -256,10 +256,13 @@ public abstract class MediaDecoder {
     protected void release() {
         if (mState == STATE_NO_TRACK_FOUND)
             return;
+        synchronized (mWeakPlayer.get().getSync()) {
+            setState(STATE_UNINITIALIZED);
+            mWeakPlayer.get().getSync().notify();
+        }
         stop();
         synchronized (mWeakPlayer.get().getSync()) {
             if (mExtractor != null) {
-                setState(STATE_UNINITIALIZED);
                 mExtractor.release();
                 mExtractor = null;
             }
@@ -311,6 +314,7 @@ public abstract class MediaDecoder {
                     mWeakPlayer.get().getSync().notify();
                 }
             } catch (IllegalStateException e) {
+                Log.d(TAG, "cant continue playing: " + e.getMessage());
                 synchronized (mWeakPlayer.get().getSync()) {
                     setState(STATE_ERROR);
                     releaseCodec();
@@ -321,7 +325,7 @@ public abstract class MediaDecoder {
     };
 
     protected void handleInput() {
-        if ((mState == STATE_PLAYING ||  mState == STATE_SEEKING) && !mInputDone)  {
+        if ((mState == STATE_PLAYING || mState == STATE_SEEKING) && !mInputDone) {
             final int inputBufIndex = mMediaCodec.dequeueInputBuffer(TIMEOUT_USEC);
             if (inputBufIndex == MediaCodec.INFO_TRY_AGAIN_LATER)
                 return;
@@ -332,7 +336,7 @@ public abstract class MediaDecoder {
 
     protected void handleOutput() {
         Log.d(TAG, TRACK_TYPE + " handle output ");
-        if ((mState == STATE_PLAYING|| mState == STATE_SEEKING) && !mOutputDone) {
+        if ((mState == STATE_PLAYING || mState == STATE_SEEKING) && !mOutputDone) {
             final int decoderStatus;
             try {
                 decoderStatus = mMediaCodec.dequeueOutputBuffer(mBufferInfo, TIMEOUT_USEC);
@@ -491,7 +495,7 @@ public abstract class MediaDecoder {
     }
 
     public boolean isChangeRate() {
-        return mState == STATE_CHANGE_RATE|| mState == STATE_NO_TRACK_FOUND;
+        return mState == STATE_CHANGE_RATE || mState == STATE_NO_TRACK_FOUND;
     }
 
     public boolean isRequestSeek() {
