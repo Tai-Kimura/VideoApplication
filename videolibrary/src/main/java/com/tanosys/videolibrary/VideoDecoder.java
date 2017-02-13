@@ -115,8 +115,16 @@ public class VideoDecoder extends MediaDecoder {
             String mime = format.getString(MediaFormat.KEY_MIME);
             mMediaCodec = MediaCodec.createDecoderByType(mime);
 //            mMediaCodec.setCallback(mCallback);
+            int rotation = format.getInteger(MediaFormat.KEY_ROTATION);
             mVideoWidth = format.getInteger(MediaFormat.KEY_WIDTH);
             mVideoHeight = format.getInteger(MediaFormat.KEY_HEIGHT);
+            if ((rotation % 180) == 0) {
+                mVideoWidth = format.getInteger(MediaFormat.KEY_WIDTH);
+                mVideoHeight = format.getInteger(MediaFormat.KEY_HEIGHT);
+            } else {
+                mVideoWidth = format.getInteger(MediaFormat.KEY_HEIGHT);
+                mVideoHeight = format.getInteger(MediaFormat.KEY_WIDTH);
+            }
             mMediaCodec.configure(format, mOutputSurface.get(), null, 0);
             setState(STATE_PREPARED);
         }

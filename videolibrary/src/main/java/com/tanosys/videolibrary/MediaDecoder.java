@@ -333,7 +333,13 @@ public abstract class MediaDecoder {
     protected void handleOutput() {
         Log.d(TAG, TRACK_TYPE + " handle output ");
         if ((mState == STATE_PLAYING|| mState == STATE_SEEKING) && !mOutputDone) {
-            final int decoderStatus = mMediaCodec.dequeueOutputBuffer(mBufferInfo, TIMEOUT_USEC);
+            final int decoderStatus;
+            try {
+                decoderStatus = mMediaCodec.dequeueOutputBuffer(mBufferInfo, TIMEOUT_USEC);
+            } catch (IllegalStateException e) {
+                Log.d(TAG, "can't dequeue output buffer: " + e.getMessage());
+                return;
+            }
             Log.d(TAG, TRACK_TYPE + " decoder status: " + decoderStatus);
             if (decoderStatus == MediaCodec.INFO_TRY_AGAIN_LATER) {
             } else if (decoderStatus == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
