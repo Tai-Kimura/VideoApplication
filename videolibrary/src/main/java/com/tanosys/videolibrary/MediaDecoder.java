@@ -282,47 +282,38 @@ public abstract class MediaDecoder {
     protected final Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
-            try {
-                for (; mState == STATE_PLAYING && !mOutputDone; ) {
-                    if (Thread.currentThread().isInterrupted())
-                        break;
-                    handleInput();
-                    handleOutput();
-                }
-                Log.d(TAG, TRACK_TYPE + " done io");
+            for (; mState == STATE_PLAYING && !mOutputDone; ) {
+                if (Thread.currentThread().isInterrupted())
+                    break;
+                handleInput();
+                handleOutput();
+            }
+            Log.d(TAG, TRACK_TYPE + " done io");
 
-                if (Thread.currentThread().isInterrupted()) {
-                    synchronized (mWeakPlayer.get().getSync()) {
-                        Log.d(TAG, "thread interrupted");
-                        releaseCodec();
-                        mWeakPlayer.get().getSync().notify();
-                    }
-                } else {
-                    synchronized (mWeakPlayer.get().getSync()) {
-                        mInputDone = mOutputDone = true;
-                        Log.d(TAG, TRACK_TYPE + " state is " + mState);
-                        if (mState == STATE_PLAYING) {
-                            setState(STATE_WAITING_FOR_LOOP);
-                            mExtractor.seekTo(0, SEEK_TO_CLOSEST_SYNC);
-                        } else if (mState == STATE_REQUEST_CHANGE_RATE) {
-                            setState(STATE_CHANGE_RATE);
-                        } else if (mState == STATE_REQUEST_STOP) {
-                            setState(STATE_STOPPED);
-                        } else if (mState == STATE_REQUEST_SEEK) {
-                            Log.d(TAG, TRACK_TYPE + "'s new state is " + mState);
-                        }
-                        mMediaCodec.stop();
-                        mWeakPlayer.get().getSync().notify();
-                    }
-                    mWeakPlayer.get().onStopped();
-                }
-            } catch (IllegalStateException e) {
-                Log.d(TAG, "cant continue playing: " + e.getMessage());
+            if (Thread.currentThread().isInterrupted()) {
                 synchronized (mWeakPlayer.get().getSync()) {
-                    setState(STATE_ERROR);
+                    Log.d(TAG, "thread interrupted");
                     releaseCodec();
-                    mWeakPlayer.get().stop();
+                    mWeakPlayer.get().getSync().notify();
                 }
+            } else {
+                synchronized (mWeakPlayer.get().getSync()) {
+                    mInputDone = mOutputDone = true;
+                    Log.d(TAG, TRACK_TYPE + " state is " + mState);
+                    if (mState == STATE_PLAYING) {
+                        setState(STATE_WAITING_FOR_LOOP);
+                        mExtractor.seekTo(0, SEEK_TO_CLOSEST_SYNC);
+                    } else if (mState == STATE_REQUEST_CHANGE_RATE) {
+                        setState(STATE_CHANGE_RATE);
+                    } else if (mState == STATE_REQUEST_STOP) {
+                        setState(STATE_STOPPED);
+                    } else if (mState == STATE_REQUEST_SEEK) {
+                        Log.d(TAG, TRACK_TYPE + "'s new state is " + mState);
+                    }
+                    mMediaCodec.stop();
+                    mWeakPlayer.get().getSync().notify();
+                }
+                mWeakPlayer.get().onStopped();
             }
         }
     };
