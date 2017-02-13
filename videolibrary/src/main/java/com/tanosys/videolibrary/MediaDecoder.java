@@ -71,9 +71,7 @@ public abstract class MediaDecoder {
         this.mState = state;
         if (state == STATE_PLAYING) {
             mLastPresentationTime = mExtractor.getSampleTime();
-            Log.d(TAG, "last presentation time: " + mLastPresentationTime);
             mLastSystemTime = (System.nanoTime() / 1000);
-            Log.d(TAG, "last system time: " + mLastSystemTime);
             mStartTime = mLastSystemTime - (long) ((double) mLastPresentationTime / mWeakPlayer.get().getPlayRate());
         }
     }
@@ -305,7 +303,7 @@ public abstract class MediaDecoder {
                         Log.d(TAG, TRACK_TYPE + " state is " + mState);
                         if (mState == STATE_PLAYING) {
                             setState(STATE_WAITING_FOR_LOOP);
-                            mExtractor.seekTo(0, SEEK_TO_CLOSEST_SYNC);
+                            mMediaCodec.flush();
                         } else if (mState == STATE_REQUEST_CHANGE_RATE) {
                             setState(STATE_CHANGE_RATE);
                         } else if (mState == STATE_REQUEST_STOP) {
@@ -315,6 +313,9 @@ public abstract class MediaDecoder {
                         }
                         mMediaCodec.stop();
                         mWeakPlayer.get().getSync().notify();
+                    }
+                    if (mState == STATE_WAITING_FOR_LOOP) {
+                        mExtractor.seekTo(0, SEEK_TO_CLOSEST_SYNC);
                     }
                     mWeakPlayer.get().onStopped();
                 }
