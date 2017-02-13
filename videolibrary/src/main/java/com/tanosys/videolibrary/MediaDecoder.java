@@ -71,7 +71,9 @@ public abstract class MediaDecoder {
         this.mState = state;
         if (state == STATE_PLAYING) {
             mLastPresentationTime = mExtractor.getSampleTime();
+            Log.d(TAG, "last presentation time: " + mLastPresentationTime);
             mLastSystemTime = (System.nanoTime() / 1000);
+            Log.d(TAG, "last system time: " + mLastSystemTime);
             mStartTime = mLastSystemTime - (long) ((double) mLastPresentationTime / mWeakPlayer.get().getPlayRate());
         }
     }
@@ -166,13 +168,10 @@ public abstract class MediaDecoder {
         if (mState == STATE_NO_TRACK_FOUND)
             return;
         synchronized (mWeakPlayer.get().getSync()) {
-            if (mDecodingThread != null && mDecodingThread.get() != null)
-                mDecodingThread.get().interrupt();
-            mDecodingThread = null;
             mInputDone = mOutputDone = false;
             prepare();
-            mMediaCodec.start();
             setState(STATE_PLAYING);
+            mMediaCodec.start();
             Thread thread = new Thread(mRunnable, getClass().getSimpleName());
             mDecodingThread = new WeakReference<>(thread);
             thread.start();

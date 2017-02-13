@@ -11,6 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb0af9ce-362c-4b54-84f3-5de565297ea3" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/build.gradle" afterPath="$PROJECT_DIR$/videolibrary/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java" afterPath="$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java" />
@@ -106,10 +107,10 @@
       <file leaf-file-name="MediaDecoder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="173" column="32" selection-start-line="173" selection-start-column="32" selection-end-line="173" selection-end-column="32" />
+            <state relative-caret-position="200">
+              <caret line="71" column="37" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
               <folding>
-                <element signature="e#0#19234#0" expanded="true" />
+                <element signature="e#0#19213#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -182,32 +183,9 @@
       <file leaf-file-name="MediaCodec.java" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-24/android/media/MediaCodec.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13095">
-              <caret line="908" column="0" selection-start-line="908" selection-start-column="0" selection-end-line="908" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#137875#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#64674#64675#0" expanded="false" />
-                <element signature="e#64707#64708#0" expanded="false" />
-                <element signature="e#77256#77257#0" expanded="false" />
-                <element signature="e#77318#77319#0" expanded="false" />
-                <element signature="e#77534#77535#0" expanded="false" />
-                <element signature="e#77598#77599#0" expanded="false" />
-                <element signature="e#77727#77728#0" expanded="false" />
-                <element signature="e#77768#77769#0" expanded="false" />
-                <element signature="e#78094#78095#0" expanded="false" />
-                <element signature="e#78140#78141#0" expanded="false" />
-                <element signature="e#81961#81962#0" expanded="false" />
-                <element signature="e#82002#82003#0" expanded="false" />
-                <element signature="e#89665#89666#0" expanded="false" />
-                <element signature="e#89715#89716#0" expanded="false" />
-                <element signature="e#89878#89879#0" expanded="false" />
-                <element signature="e#89931#89932#0" expanded="false" />
-                <element signature="e#91040#91041#0" expanded="false" />
-                <element signature="e#91084#91085#0" expanded="false" />
-                <element signature="e#131012#131013#0" expanded="false" />
-                <element signature="e#131071#131072#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="78">
+              <caret line="2519" column="48" selection-start-line="2519" selection-start-column="28" selection-end-line="2519" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -215,8 +193,8 @@
       <file leaf-file-name="MoviePlayer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="188" column="51" selection-start-line="188" selection-start-column="51" selection-end-line="188" selection-end-column="51" />
+            <state relative-caret-position="212">
+              <caret line="200" column="41" selection-start-line="200" selection-start-column="41" selection-end-line="200" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#11925#13263#0" expanded="true" />
@@ -229,7 +207,7 @@
       <file leaf-file-name="VideoDecoder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-990">
+            <state relative-caret-position="-87">
               <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
               <folding>
                 <element signature="e#0#9394#0" expanded="true" />
@@ -2632,7 +2610,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5946367880000" />
+        <entry key="$PROJECT_DIR$" value="5946368603000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -3811,37 +3789,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-24/android/media/MediaCodec.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13095">
-          <caret line="908" column="0" selection-start-line="908" selection-start-column="0" selection-end-line="908" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#137875#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#64674#64675#0" expanded="false" />
-            <element signature="e#64707#64708#0" expanded="false" />
-            <element signature="e#77256#77257#0" expanded="false" />
-            <element signature="e#77318#77319#0" expanded="false" />
-            <element signature="e#77534#77535#0" expanded="false" />
-            <element signature="e#77598#77599#0" expanded="false" />
-            <element signature="e#77727#77728#0" expanded="false" />
-            <element signature="e#77768#77769#0" expanded="false" />
-            <element signature="e#78094#78095#0" expanded="false" />
-            <element signature="e#78140#78141#0" expanded="false" />
-            <element signature="e#81961#81962#0" expanded="false" />
-            <element signature="e#82002#82003#0" expanded="false" />
-            <element signature="e#89665#89666#0" expanded="false" />
-            <element signature="e#89715#89716#0" expanded="false" />
-            <element signature="e#89878#89879#0" expanded="false" />
-            <element signature="e#89931#89932#0" expanded="false" />
-            <element signature="e#91040#91041#0" expanded="false" />
-            <element signature="e#91084#91085#0" expanded="false" />
-            <element signature="e#131012#131013#0" expanded="false" />
-            <element signature="e#131071#131072#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3864,21 +3811,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="188" column="51" selection-start-line="188" selection-start-column="51" selection-end-line="188" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#11925#13263#0" expanded="true" />
-            <element signature="e#13262#13263#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/VideoDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-990">
+        <state relative-caret-position="-87">
           <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
           <folding>
             <element signature="e#0#9394#0" expanded="true" />
@@ -3887,12 +3822,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-24/android/media/MediaCodec.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="2519" column="48" selection-start-line="2519" selection-start-column="28" selection-end-line="2519" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MoviePlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="200" column="41" selection-start-line="200" selection-start-column="41" selection-end-line="200" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11925#13263#0" expanded="true" />
+            <element signature="e#13262#13263#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/videolibrary/src/main/java/com/tanosys/videolibrary/MediaDecoder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="173" column="32" selection-start-line="173" selection-start-column="32" selection-end-line="173" selection-end-column="32" />
+        <state relative-caret-position="200">
+          <caret line="71" column="37" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
           <folding>
-            <element signature="e#0#19234#0" expanded="true" />
+            <element signature="e#0#19213#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
