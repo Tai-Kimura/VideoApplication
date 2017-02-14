@@ -38,7 +38,7 @@ You can set play rate with setRate(). Slowest play rate and fastest play rate ar
 For Seeking, you should call startSeek() when you want to start seeking and call endSeek() when you want to end seeking.
 Pass progress(0-1.0) to seekTo() method to seek specified position of the video.
 
-# LICENSE
+# License
 
 Copyright (c) 2017 taichiro kimura
 
