@@ -71,8 +71,8 @@ public class VideoDecoder extends MediaDecoder {
         return mOutputSurface;
     }
 
-    public void setOutputSurface(Surface mOutputSurface) {
-        this.mOutputSurface = new WeakReference<>(mOutputSurface);
+    public void setOutputSurface(Surface outputSurface) {
+        this.mOutputSurface = new WeakReference<>(outputSurface);
         int state = mState;
         setState(STATE_INITIALIZED);
         try {

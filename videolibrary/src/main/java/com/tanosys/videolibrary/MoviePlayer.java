@@ -369,4 +369,9 @@ public class MoviePlayer {
     public int getVideoHeight() {
         return mVideoDecoder != null ? mVideoDecoder.getVideoHeight() : 0;
     }
+
+    public void setOutputSurface(Surface surface) {
+        if (mVideoDecoder != null)
+            mVideoDecoder.setOutputSurface(surface);
+    }
 }
