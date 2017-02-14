@@ -73,6 +73,15 @@ public class VideoDecoder extends MediaDecoder {
 
     public void setOutputSurface(Surface mOutputSurface) {
         this.mOutputSurface = new WeakReference<>(mOutputSurface);
+        int state = mState;
+        setState(STATE_INITIALIZED);
+        try {
+            stop();
+            prepare();
+            setState(state);
+        } catch (IOException e) {
+            Log.d(TAG, "cant replace output surface");
+        }
     }
 
     private WeakReference<Surface> mOutputSurface;
