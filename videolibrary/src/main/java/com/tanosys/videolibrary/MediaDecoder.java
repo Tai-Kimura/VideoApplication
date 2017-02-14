@@ -144,6 +144,7 @@ public abstract class MediaDecoder {
         for (int i = 0; i < numTracks; i++) {
             MediaFormat format = mExtractor.getTrackFormat(i);
             String mime = format.getString(MediaFormat.KEY_MIME);
+            Log.d(TAG, "track: " + mime);
             if (mime.startsWith(TRACK_TYPE + "/")) {
                 Log.d(TAG, "Extractor selected track " + i + " (" + mime + "): " + format);
                 return i;
