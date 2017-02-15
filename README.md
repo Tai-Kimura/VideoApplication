@@ -42,6 +42,16 @@ You can set loop mode with setLooping() method. if set looping true, player will
 
 You can set MoviePlayerListener with setListener() mehod. Then you can implement functions on each event.
 
+    void onStopped(MoviePlayer moviePlayer);
+
+    void onReachedEnd(MoviePlayer moviePlayer);
+
+    void onChangeRate(MoviePlayer moviePlayer);
+
+    void onStartSeeking(MoviePlayer moviePlayer);
+
+    void onEndSeeking(MoviePlayer moviePlayer);
+
 # License
 
 Copyright (c) 2017 taichiro kimura
