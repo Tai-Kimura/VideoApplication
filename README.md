@@ -52,6 +52,9 @@ You can set MoviePlayerListener with setListener() mehod. Then you can implement
 
     void onEndSeeking(MoviePlayer moviePlayer);
 
+methods pause(), startSeek(), endSeek() and setRate() will not immediately perform each action. They'll tell player thread to perform each action.
+To know when the action is done, You should implement MoviePlayerListener.
+
 # License
 
 Copyright (c) 2017 taichiro kimura
