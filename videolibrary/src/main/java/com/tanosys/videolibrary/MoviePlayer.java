@@ -303,6 +303,8 @@ public class MoviePlayer {
                 mAudioDecoder.changePlayRate();
             } else {
                 mPlayRate = rate;
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(mOnChangeRateRunnable);
             }
             mSync.notifyAll();
         }
