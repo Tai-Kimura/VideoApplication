@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -38,7 +39,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
 
-public class VideoPlayActivity extends AppCompatActivity implements SurfaceHolder.Callback, MoviePlayer.ProgressListener {
+import static com.tanosys.videoapplication.R.id.seekBar;
+
+public class VideoPlayActivity extends AppCompatActivity implements SurfaceHolder.Callback, MoviePlayer.ProgressListener, MoviePlayer.MoviePlayerListener {
+    final private static String TAG = "VideoPlayActivity";
     private String videoPath;
     MoviePlayer moviePlayer;
 
@@ -81,7 +85,7 @@ public class VideoPlayActivity extends AppCompatActivity implements SurfaceHolde
             }
         });
 
-        ((SeekBar) findViewById(R.id.seekBar)).setOnSeekBarChangeListener(seekBarChangeListener);
+        ((SeekBar) findViewById(seekBar)).setOnSeekBarChangeListener(seekBarChangeListener);
     }
 
     private SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
@@ -191,6 +195,7 @@ public class VideoPlayActivity extends AppCompatActivity implements SurfaceHolde
             File file = new File(videoPath);
             moviePlayer = new MoviePlayer(file, surfaceHolder.getSurface());
             moviePlayer.setProgressListener(VideoPlayActivity.this);
+            moviePlayer.setListener(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -210,6 +215,32 @@ public class VideoPlayActivity extends AppCompatActivity implements SurfaceHolde
 
     @Override
     public void onProgressChange(float progress) {
-        ((SeekBar) findViewById(R.id.seekBar)).setProgress((int) (progress * 100.0f));
+        ((SeekBar) findViewById(seekBar)).setProgress((int) (progress * 100.0f));
+    }
+
+    @Override
+    public void onStopped(MoviePlayer moviePlayer) {
+        Log.d(TAG, "movie player onStopped");
+    }
+
+    @Override
+    public void onReachedEnd(MoviePlayer moviePlayer) {
+        Log.d(TAG, "movie player onReached End");
+    }
+
+    @Override
+    public void onChangeRate(MoviePlayer moviePlayer) {
+        Log.d(TAG, "movie player onChangeRate");
+    }
+
+    @Override
+    public void onStartSeeking(MoviePlayer moviePlayer) {
+        Log.d(TAG, "movie player onStartSeeking");
+        moviePlayer.seekTo((float) ((SeekBar) findViewById(seekBar)).getProgress() / ((SeekBar) findViewById(seekBar)).getMax());
+    }
+
+    @Override
+    public void onEndSeeking(MoviePlayer moviePlayer) {
+        Log.d(TAG, "movie player onEndSeeking");
     }
 }

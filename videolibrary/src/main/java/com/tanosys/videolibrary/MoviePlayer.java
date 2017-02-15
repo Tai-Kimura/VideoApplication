@@ -31,7 +31,6 @@ import java.lang.ref.WeakReference;
 
 import static android.media.MediaExtractor.SEEK_TO_CLOSEST_SYNC;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_NO_TRACK_FOUND;
-import static com.tanosys.videolibrary.MediaDecoder.STATE_SEEKING;
 import static com.tanosys.videolibrary.MediaDecoder.STATE_STOPPED;
 
 /**
@@ -76,6 +75,22 @@ public class MoviePlayer {
     protected boolean mPlayWhenDoneSeek = false;
 
     protected float mProgress = 0;
+
+    public boolean isLooping() {
+        return mIsLooping;
+    }
+
+    public void setLooping(boolean loop) {
+        this.mIsLooping = loop;
+    }
+
+    private boolean mIsLooping = true;
+
+    public void setListener(MoviePlayerListener listener) {
+        this.mListener = new WeakReference<>(listener);
+    }
+
+    private WeakReference<MoviePlayerListener> mListener;
 
 
     public MoviePlayer(File sourceFile, Surface outputSurface)
@@ -136,7 +151,7 @@ public class MoviePlayer {
     public boolean isPaused() {
         return (mVideoDecoder.getState() <= STATE_STOPPED
         ) && (mAudioDecoder.getState() <= STATE_STOPPED
-         );
+        );
     }
 
     public boolean isSeeking() {
@@ -191,19 +206,29 @@ public class MoviePlayer {
                 }
                 mVideoDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
                 mAudioDecoder.getExtractor().seekTo(mVideoDecoder.getExtractor().getSampleTime(), SEEK_TO_CLOSEST_SYNC);
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(mOnStoppedRunnable);
             } else if (mVideoDecoder.isWaitingForLoop() && mAudioDecoder.isWaitingForLoop()) {
                 if (mRequestedPlayRate != 0) {
                     mPlayRate = mRequestedPlayRate;
                     mRequestedPlayRate = 0;
                 }
                 Log.d(TAG, "looping");
-                try {
-                    mVideoDecoder.startPlaying();
-                    mAudioDecoder.startPlaying();
-                    mProgressHandler = new Handler(Looper.getMainLooper());
-                    mProgressHandler.post(mProgressRunnable);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (!mIsLooping) {
+                    mVideoDecoder.setState(STATE_STOPPED);
+                    mAudioDecoder.setState(STATE_STOPPED);
+                }
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(mOnReachedEndRunnable);
+                if (mIsLooping) {
+                    try {
+                        mVideoDecoder.startPlaying();
+                        mAudioDecoder.startPlaying();
+                        mProgressHandler = new Handler(Looper.getMainLooper());
+                        mProgressHandler.post(mProgressRunnable);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             } else if (mVideoDecoder.isChangeRate() && mAudioDecoder.isChangeRate()) {
                 if (mRequestedPlayRate != 0) {
@@ -217,6 +242,8 @@ public class MoviePlayer {
                     mAudioDecoder.startPlaying();
                     mProgressHandler = new Handler(Looper.getMainLooper());
                     mProgressHandler.post(mProgressRunnable);
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(mOnChangeRateRunnable);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -224,6 +251,8 @@ public class MoviePlayer {
                 try {
                     mVideoDecoder.startSeeking();
                     mAudioDecoder.startSeeking();
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(mOnStartSeekingRunnable);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -237,6 +266,8 @@ public class MoviePlayer {
                 long sampleTime = mVideoDecoder.getSeekTargetTime();
                 mVideoDecoder.getExtractor().seekTo(sampleTime, SEEK_TO_CLOSEST_SYNC);
                 mAudioDecoder.getExtractor().seekTo(sampleTime, SEEK_TO_CLOSEST_SYNC);
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(mOnEndSeekingRunnable);
                 if (mPlayWhenDoneSeek) {
                     try {
                         mVideoDecoder.startPlaying();
@@ -288,10 +319,13 @@ public class MoviePlayer {
                 Log.d(TAG, "start seeking with: seeking");
                 try {
                     mVideoDecoder.startSeeking();
+                    mAudioDecoder.startSeeking();
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(mOnStartSeekingRunnable);
                 } catch (IOException e) {
                     Log.d(TAG, "error when start seek");
                 }
-                mAudioDecoder.setState(STATE_SEEKING);
+
             }
             mSync.notifyAll();
         }
@@ -373,5 +407,57 @@ public class MoviePlayer {
     public void setOutputSurface(Surface surface) {
         if (mVideoDecoder != null)
             mVideoDecoder.setOutputSurface(surface);
+    }
+
+    private Runnable mOnStoppedRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mListener != null && mListener.get() != null)
+                mListener.get().onStopped(MoviePlayer.this);
+        }
+    };
+
+    private Runnable mOnChangeRateRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mListener != null && mListener.get() != null)
+                mListener.get().onChangeRate(MoviePlayer.this);
+        }
+    };
+
+    private Runnable mOnStartSeekingRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mListener != null && mListener.get() != null)
+                mListener.get().onStartSeeking(MoviePlayer.this);
+        }
+    };
+
+    private Runnable mOnEndSeekingRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mListener != null && mListener.get() != null)
+                mListener.get().onEndSeeking(MoviePlayer.this);
+        }
+    };
+
+    private Runnable mOnReachedEndRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mListener != null && mListener.get() != null)
+                mListener.get().onReachedEnd(MoviePlayer.this);
+        }
+    };
+
+    public interface MoviePlayerListener {
+        void onStopped(MoviePlayer moviePlayer);
+
+        void onReachedEnd(MoviePlayer moviePlayer);
+
+        void onChangeRate(MoviePlayer moviePlayer);
+
+        void onStartSeeking(MoviePlayer moviePlayer);
+
+        void onEndSeeking(MoviePlayer moviePlayer);
     }
 }
