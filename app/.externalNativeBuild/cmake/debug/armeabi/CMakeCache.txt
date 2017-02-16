@@ -18,10 +18,10 @@
 ANDROID_ABI:UNINITIALIZED=armeabi
 
 //No help, variable specified on the command line.
-ANDROID_NDK:UNINITIALIZED=/Users/like-a-rolling_stone/Library/Android/sdk/ndk-bundle
+ANDROID_NATIVE_API_LEVEL:UNINITIALIZED=18
 
 //No help, variable specified on the command line.
-ANDROID_PLATFORM:UNINITIALIZED=android-18
+ANDROID_NDK:UNINITIALIZED=/Users/like-a-rolling_stone/Library/Android/sdk/ndk-bundle
 
 //Archiver
 CMAKE_AR:FILEPATH=/Users/like-a-rolling_stone/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-ar

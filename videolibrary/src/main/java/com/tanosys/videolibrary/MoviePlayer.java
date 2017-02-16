@@ -56,6 +56,10 @@ public class MoviePlayer {
 
     private WeakReference<ProgressListener> mProgressListener;
 
+    public long getVideoDuration() {
+        return mVideoDuration;
+    }
+
     protected long mVideoDuration = 0;
 
     public Object getSync() {
