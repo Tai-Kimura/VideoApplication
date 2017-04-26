@@ -86,6 +86,11 @@ public class VideoDecoder extends MediaDecoder {
     @Override
     protected void prepare() throws IOException {
         if (mState < STATE_PREPARED) {
+            if (mOutputSurface.get() == null) {
+                IOException e = new IOException("Surface can't be null");
+                throw e;
+            }
+
             Log.d(TAG, "Video size is " + mVideoWidth + "x" + mVideoHeight);
             if (mState == STATE_UNINITIALIZED) {
                 mTrackIndex = selectTrack();
