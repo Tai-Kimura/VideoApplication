@@ -73,6 +73,7 @@ public class VideoDecoder extends MediaDecoder {
 
     public void setOutputSurface(Surface outputSurface) {
         this.mOutputSurface = new WeakReference<>(outputSurface);
+        this.releaseCodec();
     }
 
     private WeakReference<Surface> mOutputSurface;
